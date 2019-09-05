@@ -1,0 +1,17 @@
+Backprop for binary classification [[file:backprop.R][coding demo]]
+
+Figure: train/validation loss for neural network.
+
+[[file:figure-nnet-spam.png]]
+
+Figure: linear model underfits relative to neural network.
+
+[[file:figure-nnet-spam-compare-linear.png]]
+
+Figure: train/validation error for 4 folds.
+
+[[file:figure-nnet-spam-cv-folds.png]]
+
+Figure: mean train/validation error over 4 folds.
+
+[[file:figure-nnet-spam-cv.png]]
