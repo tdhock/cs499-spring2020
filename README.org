@@ -1,12 +1,14 @@
 Computer Science 499-003 (9235) at Northern Arizona University, Spring 2020
 
-Deep Learning
+Topic: Deep Learning
 
-1/13/2020 - 5/8/2020 
+Dates: 1/13/2020 - 5/8/2020 
 
-TuTh 9:35-10:50, SICCS, Room 102
+Meeting time/place: TuTh 9:35-10:50, SICCS, Room 102
 
-** Books
+Syllabus: [[file:CS499-Spring2020-Deep-Learning-Syllabus.pdf][PDF]].
+
+** Textbook
 
 The required readings will be from [[https://www.deeplearningbook.org/][Deep Learning]] by Goodfellow, et
 al., which is freely available online.
