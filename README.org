@@ -6,8 +6,6 @@ Deep Learning
 
 TuTh 9:35-10:50, SICCS, Room 102
 
-[[file:CS499-Spring2019-ML-Syllabus.pdf]]
-
 ** Books
 
 The required readings will be from [[https://www.deeplearningbook.org/][Deep Learning]] by Goodfellow, et
@@ -15,9 +13,9 @@ al., which is freely available online.
 
 ** Lectures
 
-TODO
+- Jan 14: [[file:2020-01-14-applications/slides.pdf]]
 
-- [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
+- TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
 
