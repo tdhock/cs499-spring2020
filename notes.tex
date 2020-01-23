@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\title{CS499 Deep Learning Lecture Notes}
+\author{Toby Dylan Hocking}
+
+Each section is one 75-minute lecture.
+
+\section{Linear algebra}
+
+Why do we care? In ML we have inputs (e.g. image of a digit) and
+outputs (e.g. integer class) and the goal is to learn $f$ which takes
+the input and yields the correct output.
+
+Inputs are typically represented by vectors/matrices, e.g. grayscale
+image actually $[0,1]^{16 \times 16}$ where 0=white and 1=black.
+
+Ex: email message summarized as bag of words.
+
+Matrix multiplication is used to get ML model predictions.
+
+Scalars, vectors, matrices, tensors.
+
+Sets, function domain and range notation.
+
+Subset of a function returning a matrix $f(\mathbf A)_{i,j}$ means
+first apply function $f$ then take row $i$ and column $j$.
+
+Transpose, addition, scalar multiplication, matrix-vector addition
+(broadcast a vector to each row), matrix product, element-wise
+product, dot product.
+
+Properties: associative, distributive, transpose of product, NOT
+commutative in general.
+
+System of linear equations $\mathbf A \mathbf x = \mathbf b$, identity
+and inverse. Functions for computing $\mathbf A^{-1}$ primarily useful
+in theory, but on computers we should solve for $\mathbf x$ using a
+function that considers both $\mathbf A,\mathbf b$ (for numerical
+stability/precision).
+
+Norms: L1, L2, max, measure size of vectors.
+
+Quiz: given a matrix $\mathbf A$ and $g(x)=x^T$, what is $g(\mathbf A)_{1,2}$?
+
+\section{Probability distributions}
+
+Why? useful for uncertainty. Very suspicious email should have
+probability 0.99 of being spam, borderline suspicious email 0.51.
+
+Two interpretations: rates e.g. coin toss, degree of belief
+e.g. doctor diagnosis.
+
+Discrete and continuous random variables. Examples: time to relapse,
+blood pressure, spam/not digits, clothing classes, number of classes
+attended.
+
+Discrete, countably many values (can be ordered), PMF, prob=1 certain,
+prob=0 impossible. Different $p$ notations. Three properties: domain
+of $p$, all prob values must be between 0 and 1, and must sum to 1
+(normalization).
+
+Diagrams. Plot prob versus state/value.
+
+Continuous, uncountably infinitely many values. Three properties of pdf:
+domain = set of possible states, all pdf values are non-negative (no
+upper bound), and must integrate to 1. PDF is not prob of specific
+value, need to integrate to get finite probability.
+
+Quiz: L1-norm of a given vector.
+
+\section{Distributions for outputs in supervised learning}
+
+Begin by explaining supervised learning, inputs, outputs, function to
+learn (which is always real-valued, even when the output is
+not). Discuss examples of different inputs/outputs along with class.
+
+Table with three rows (Gaussian, Bernoulli, Poisson) and columns:
+output space, link distribution $y\sim p(x|f)$.
+
+Define total likelihood $L(f)$ given all training data. Want to find
+$f$ that maximizes the probability.
+
+Argmax = argument that results in optimal function value, max =
+optimal function value. Draw gaussian argmax.
+
+Information theory. Likely events = low information content, unlikely
+events = high information content, independent events additive (two
+coin flips yield twice as much info).
+
+Self-information of an event $I(x) = -\log p(x)$.
+
+Shannon entropy of $X\sim p$: $H(p)=H(X)= E_{X\sim p}[I(X)] =
+-E_{X\sim P} [ \log P(X) ]$ is the expected amount of information in
+an event $X$ drawn from distribution $p$.
+
+KL divergence is useful for ML, because we can learn by finding a
+model that minimizes KL-div with respect to data.
+
+\section{Loss functions and gradient descent}
+
+Derive logistic loss using either maximum likelihood or min
+KL-divergence.
+
+Introduce project 1 (gradient descent for logistic regression).
+
+\end{document}
