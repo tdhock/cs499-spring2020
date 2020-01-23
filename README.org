@@ -1,23 +1,23 @@
 Computer Science 499-003 (9235) at Northern Arizona University, Spring 2020
 
-Deep Learning
+Topic: Deep Learning
 
-1/13/2020 - 5/8/2020 
+Dates: 1/13/2020 - 5/8/2020 
 
-TuTh 9:35-10:50, SICCS, Room 102
+Meeting time/place: TuTh 9:35-10:50, SICCS, Room 102
 
-[[file:CS499-Spring2019-ML-Syllabus.pdf]]
+Syllabus: [[file:CS499-Spring2020-Deep-Learning-Syllabus.pdf][PDF]].
 
-** Books
+** Textbook
 
 The required readings will be from [[https://www.deeplearningbook.org/][Deep Learning]] by Goodfellow, et
 al., which is freely available online.
 
 ** Lectures
 
-TODO
+- Jan 14: [[file:2020-01-14-applications/slides.pdf]]
 
-- [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
+- TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
 
