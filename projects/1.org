@@ -103,12 +103,13 @@ Your final grade for this project will be computed by multiplying the
 percentage from your [[file:group-evals.org][group evaluations]] with your group's total score
 from the rubric below.
 
-Your group should submit a PDF on BBLearn.
+Your group should submit a PDF on BBLearn. 
+- The first thing in the PDF should be your names and student ID's
+  (e.g. th798) and a link to your source code in a public repo
+  (e.g. github).
 - 70 points as explained above for figures/tables/text for each data
   set (x3 = 210 points).
-- 40 points for source code as explained above. Make sure to include a
-  link to your publicly available source code repo (e.g. on github),
-  otherwise I can't find your source code and you will get a zero.
+- 40 points for source code as explained above. 
 
 Extra credit: 
 - 10 points if your github repo includes a README file with a link to
