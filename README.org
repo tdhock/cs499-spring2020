@@ -21,6 +21,8 @@ al., which is freely available online.
 
 ** Coding projects
 
+Late submissions will not be accepted.
+
 - [[file:projects/1.org][1: gradient descent algorithm for logistic regression]], due Fri Feb 7
   @ 11:59PM.
 - 2, due Fri Feb 21 @ 11:59PM.
