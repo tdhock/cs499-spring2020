@@ -21,7 +21,7 @@ al., which is freely available online.
 
 ** Coding projects
 
-TODO
+- [[file:projects/1.org][1: gradient descent algorithm for logistic regression]]
 
 ** How to ace this class
 
