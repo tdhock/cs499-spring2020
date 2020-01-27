@@ -1,0 +1,25 @@
+Group evaluations will be used to encourage each group member to
+participate equally. Each member of the group will fill an eval form,
+in which they will assign a percentage to each group member (including
+themself), subject to the constraint that the total percentage must be
+100 times the number of group members. Percentages may exceed 100, but
+if there are any percentages above 115 or below 85 then they must be
+justified with a paragraph in writing. Finally your mean percentage
+(as given by yourself and your other group members) will be MULTIPLIED
+with your score below to obtain your final grade for this project.
+
+Example 1: in a group of three, if everyone assigns 100 to everyone
+else, then everyone's score is the same as the group score.
+
+Example 2: in a group of two, student A gives 100 to both students,
+and student B gives 110 to both students. In that case student B must
+re-do the group evaluation, because the total number of points is too
+large (the total over students must be 200 but it is 220).
+
+Example 3: in a group of two, student A gives themself 115 and the
+other student 85, whereas student B gives 100 to both students. Assume
+the group score was 85. Then student A's mean percentage is
+(100+115)/2=107.5 and final grade is 107.5*85/100=91.375 (A), whereas
+student B's mean percentage is (85+100)/2=92.5 and final grade is
+92.5*85/100=78.625 (C).
+

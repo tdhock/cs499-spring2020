@@ -1,0 +1,125 @@
+Gradient descent for logistic regression
+
+In this project your goal is to implement the gradient descent
+algorithm for learning a logistic regression model, and then use it on
+several real data sets.
+
+*** Algorithm/function: GradientDescent
+- (10 points) You should code a function GradientDescent which should take as
+  input arguments:
+  - X, a matrix of numeric inputs (one row for each observation, one column
+    for each feature).
+  - y, a vector of binary outputs (the corresponding label for each
+    observation, either 0 or 1).
+  - stepSize, also known as learning rate (epsilon parameter in
+    Algorithm 4.1 in the book), a positive real number that controls
+    how far to step in the negative gradient direction.
+  - maxIterations, positive integer that controls how many steps to
+    take.
+- (5 points) The function should declare a variable called
+  weightVector which is initialized to the zero vector (one element
+  for each feature).
+- (5 points) There should be a variable called weightMatrix of real
+  numbers (number of rows = number of input features, number of
+  columns = maxIterations).
+- (15 points) The algorithm should include a for loop over iterations
+  (from 1 to maxIterations). During each iteration you should
+  - first compute the gradient given the current weightVector, 
+  - then update weightVector by taking a step in the negative gradient
+    direction.
+  - then store the resulting weightVector in the corresponding column
+    of weightMatrix.
+- (5 points) At the end of the algorithm you should return
+  weightMatrix.
+
+*** Experiments/application: run your code on the following data sets
+- Data sets from [[https://web.stanford.edu/~hastie/ElemStatLearn/data.html]]:
+  - spam 2-class [4601, 57] output is last column (spam).
+  - SAheart 2-class [462, 9] output is last column (chd).
+  - zip.train: 10-class [7291, 256] output is first column. (ignore
+    classes other than 0 and 1)
+- For each data set:
+  - First scale the inputs (each column should have mean 0 and
+    variance 1).
+  - (10 points) Second, randomly split the data into 60% train, 20%
+    validation, 20% test. In your report please include a table of
+    counts with a row for each set (train/validation/test) and a
+    column for each class (0/1). In the text write a sentence which
+    explains what class is most frequent in the train set, as that
+    will be used as a baseline prediction. e.g. for zip.train below
+    the most frequent class in the train set is 0 (digit 0).
+  #+BEGIN_SRC 
+            y
+set            0   1
+  test       254 191
+  train      709 614
+  validation 231 200
+  #+END_SRC
+  - (5 points) Use GradientDescent on train data to compute a learned
+    weightMatrix. In your text write what values you used for stepSize
+    and maxIterations (they can be different for each data set).
+  - Multiply train and validation inputs with weightMatrix to obtain a
+    matrix of predicted values (number of rows = number of
+    observations, number of columns = number of iterations).
+  - (10 points) Plot error rate (percent incorrectly predicted labels) and
+    logistic loss as a function of number of iterations, separately
+    for each set (black line for train, red line for validation). For
+    example
+  - [[file:../2019-04-04-neural-network-classification/figure-nnet-spam.png]]
+  - (5 points) Make sure to include a legend or direct labels so the
+    reader knows what the different colors mean.
+  - (5 points) The logistic loss on the train set should always go
+    down, whereas on the validation set it should go down and then go
+    back up after a certain number of iterations. If they do not, then
+    try decreasing the step size and increasing the number of
+    iterations.
+  - (5 points) Plot a point to highlight the minimum value of each of
+    the two curves.
+  - (5 points) What is the number of iterations that minimizes the
+    validation error? Either write the number in your text and/or on
+    the figure. The corresponding column of weightMatrix is the one
+    that you should use on the test data.
+  - (10 points) Make a table of error rates with three rows
+    (train/validation/test sets) and two columns (logistic regression
+    and baseline). For the logistic regression (first column), use the
+    weight vector that minimizes the validation error to make
+    predictions on the whole data set, then report the error rates for
+    each set. For the baseline (second column), always predict the
+    class label that is most frequent in the train set, then report
+    the error rates for each set.
+  - (10 points) For each model (logistic regression and baseline),
+    compute the Receiver Operating Characteristic (ROC) curve of the
+    predictions with respect to the test set. Plot each model as a
+    different colored curve in ROC space (y axis for TPR = True
+    Positive Rate, x axis for FPR = False Positive Rate),
+    e.g. logistic regression in blue, baseline in violet. For example
+  - [[file:1-ROC.PNG]]
+  - (5 points) For each model plot a circle/dot in the same color that
+    shows the FPR/TPR of the predictions at the default threshold.
+
+*** Grading rubric (out of 250 points)
+
+Your final grade for this project will be computed by multiplying the
+percentage from your [[file:group-evals.org][group evaluations]] with your group's total score
+from the rubric below.
+
+Your group should submit a PDF on BBLearn.
+- 70 points as explained above for figures/tables/text for each data
+  set (x3 = 210 points).
+- 40 points for source code as explained above. Make sure to include a
+  link to your publicly available source code repo (e.g. on github),
+  otherwise I can't find your source code and you will get a zero.
+
+Extra credit: 
+- 10 points if your github repo includes a README file with a link to
+  the source code of your GradientDescent function, and an explanation
+  about how to run it on the data sets.
+- 10 points if, instead of writing code that is specific to each data
+  set, you write a for loop over data sets and parameter values. For
+  example you could create a data/ directory with sub-directories
+  data/spam/ etc, each with data/spam/X.csv, data/spam/y.csv,
+  data/spam/parameters.csv (which would store a stepSize and
+  maxIterations value to use for each data set), then your code can
+  loop over these data/ sub-directories, and create the corresponding
+  tables/figures for each one.
+
