@@ -88,11 +88,16 @@ set            0   1
     class label that is most frequent in the train set, then report
     the error rates for each set.
   - (10 points) For each model (logistic regression and baseline),
-    compute the Receiver Operating Characteristic (ROC) curve of the
+    compute the 
+    [[https://en.wikipedia.org/wiki/Receiver_operating_characteristic][Receiver Operating Characteristic (ROC)]] 
+    curve of the
     predictions with respect to the test set. Plot each model as a
     different colored curve in ROC space (y axis for TPR = True
     Positive Rate, x axis for FPR = False Positive Rate),
-    e.g. logistic regression in blue, baseline in violet. For example
+    e.g. logistic regression in blue, baseline in violet. 
+    Make sure to include a legend so the reader can tell 
+    what color corresponds to what model.
+    For example
   - [[file:1-ROC.PNG]]
   - (5 points) For each model plot a circle/dot in the same color that
     shows the FPR/TPR of the predictions at the default threshold.
