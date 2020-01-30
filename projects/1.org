@@ -1,10 +1,18 @@
 Gradient descent for logistic regression
 
 In this project your goal is to implement the gradient descent
-algorithm for learning a logistic regression model, and then use it on
-several real data sets.
+algorithm for learning a logistic regression model, and then use it
+with early stopping regularization to make predictions on several real
+data sets.
+
+If you have never done any plotting before, I would recommend reading
+[[https://r4ds.had.co.nz/data-visualisation.html][this tutorial]] and using the ggplot2 package in R.
 
 *** Algorithm/function: GradientDescent
+The goal of this exercise is to code the gradient descent algorithm
+(also known as steepest descent) which iteratively computes linear
+model parameters that minimize the average logistic loss over the
+training data.
 - (10 points) You should code a function GradientDescent which should take as
   input arguments:
   - X, a matrix of numeric inputs (one row for each observation, one column
@@ -15,7 +23,7 @@ several real data sets.
     Algorithm 4.1 in the book), a positive real number that controls
     how far to step in the negative gradient direction.
   - maxIterations, positive integer that controls how many steps to
-    take.
+    take. 
 - (5 points) The function should declare a variable called
   weightVector which is initialized to the zero vector (one element
   for each feature).
@@ -24,7 +32,9 @@ several real data sets.
   columns = maxIterations).
 - (15 points) The algorithm should include a for loop over iterations
   (from 1 to maxIterations). During each iteration you should
-  - first compute the gradient given the current weightVector, 
+  - first compute the gradient given the current weightVector (make
+    sure that the gradient is of the mean logistic loss over all
+    training data),
   - then update weightVector by taking a step in the negative gradient
     direction.
   - then store the resulting weightVector in the corresponding column
@@ -72,7 +82,10 @@ set            0   1
     down, whereas on the validation set it should go down and then go
     back up after a certain number of iterations. If they do not, then
     try decreasing the step size and increasing the number of
-    iterations.
+    iterations. This is where the term "early stopping regularization"
+    comes from: rather than take all of the steps required to minimize
+    the train loss, it is actually better in terms of validation error
+    to stop at a smaller number of steps.
   - (5 points) Plot a point to highlight the minimum value of each of
     the two curves.
   - (5 points) What is the number of iterations that minimizes the
@@ -88,16 +101,15 @@ set            0   1
     class label that is most frequent in the train set, then report
     the error rates for each set.
   - (10 points) For each model (logistic regression and baseline),
-    compute the 
-    [[https://en.wikipedia.org/wiki/Receiver_operating_characteristic][Receiver Operating Characteristic (ROC)]] 
-    curve of the
-    predictions with respect to the test set. Plot each model as a
-    different colored curve in ROC space (y axis for TPR = True
-    Positive Rate, x axis for FPR = False Positive Rate),
-    e.g. logistic regression in blue, baseline in violet. 
-    Make sure to include a legend so the reader can tell 
-    what color corresponds to what model.
-    For example
+    compute the [[https://en.wikipedia.org/wiki/Receiver_operating_characteristic][Receiver Operating Characteristic (ROC)]] curve of the
+    predictions with respect to the test set. Please do NOT implement
+    the ROC curve computation yourself; instead please use an existing
+    package, [[https://github.com/tdhock/WeightedROC#comparison-with-other-r-packages-implementing-roc-curve-computation][here is a list of R packages that implement ROC curve
+    computation]]. Plot each model as a different colored curve in ROC
+    space (y axis for TPR = True Positive Rate, x axis for FPR = False
+    Positive Rate), e.g. logistic regression in blue, baseline in
+    violet.  Make sure to include a legend so the reader can tell what
+    color corresponds to what model.  For example
   - [[file:1-ROC.PNG]]
   - (5 points) For each model plot a circle/dot in the same color that
     shows the FPR/TPR of the predictions at the default threshold.
@@ -129,4 +141,9 @@ Extra credit:
   each data set), then your code can loop over these data/
   sub-directories, and create the corresponding tables/figures for
   each one.
-
+- 10 points if you do the random train/validation/test split three
+  times for each data set. Each split yields a different learned
+  model, a different test set, and thus a different ROC curve. Plot
+  all three ROC curves in the same color, on the same axes, so the
+  reader can see if the variance, and see if there is any significant
+  difference between your learned model and the baseline.
