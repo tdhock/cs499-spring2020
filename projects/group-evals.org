@@ -6,7 +6,7 @@ themself), subject to the constraint that the total percentage must be
 if there are any percentages above 115 or below 85 then they must be
 justified with a paragraph in writing. Finally your mean percentage
 (as given by yourself and your other group members) will be MULTIPLIED
-with your score below to obtain your final grade for this project.
+with your group project score to obtain your final grade for the project.
 
 Example 1: in a group of three, if everyone assigns 100 to everyone
 else, then everyone's score is the same as the group score.
