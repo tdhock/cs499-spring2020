@@ -23,7 +23,7 @@ training data.
     observation, either 0 or 1).
   - stepSize, also known as learning rate (epsilon parameter in
     Algorithm 4.1 in the book), a positive real number that controls
-    how far to step in the negative gradient direction.
+    how far to step in the negative gradient direction. (try a value between 0 and 1, like 0.1, then either increase or decrease until you get the desired result = train error always decreasing, validation loss decreasing and then increasing as the number of iterations increases)
   - maxIterations, positive integer that controls how many steps to
     take. 
 - (5 points) The function should declare a variable called
