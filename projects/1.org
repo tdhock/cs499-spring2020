@@ -6,7 +6,9 @@ with early stopping regularization to make predictions on several real
 data sets.
 
 If you have never done any plotting before, I would recommend reading
-[[https://r4ds.had.co.nz/data-visualisation.html][this tutorial]] and using the ggplot2 package in R.
+[[https://r4ds.had.co.nz/data-visualisation.html][this tutorial]] and using the ggplot2 package in R. Or [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch02-ggplot2.html][this user manual]]
+for the animint2 package, which has basically the same syntax (but is
+for interactive plots).
 
 *** Algorithm/function: GradientDescent
 The goal of this exercise is to code the gradient descent algorithm
