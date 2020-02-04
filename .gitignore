@@ -7,3 +7,5 @@ roster.xlsx
 *out
 *snm
 *toc
+.gitignore
+.Rhistory

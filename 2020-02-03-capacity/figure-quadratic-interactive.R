@@ -1,10 +1,10 @@
-library(ggplot2)
+library(animint2)
 library(data.table)
 
 f <- function(x)x^2
 min.x <- -5
 max.x <- 5
-x.vec <- seq(min.x, max.x, l=101)
+x.vec <- seq(min.x, max.x, l=501)
 x.dt <- data.table(x=x.vec)
 f.dt <- data.table(x.dt, pred.y=f(x.vec), fun="true")
 ggplot()+
@@ -56,29 +56,35 @@ for(degree in degree.vec){
 model.dt <- do.call(rbind, model.dt.list)
 error.dt <- do.call(rbind, error.dt.list)
 
-gg.funs <- ggplot()+
-  geom_point(aes(
-    x, y),
-    data=train.dt)+
-  geom_line(aes(
-    x, pred.y, color=fun),
-    data=model.dt[degree %in% c(1,2,N.train-1)])+
-  coord_cartesian(ylim=range(train.dt$y))
-print(gg.funs)
-
-png("figure-quadratic-funs.png", width=6, height=4, units="in", res=100)
-print(gg.funs)
-dev.off()
-
+all.sets <- data.table(set=names(set.list))[, set.list[[set]], by=set]
 best.err <- error.dt[set=="test"][mse==min(mse)]
-gg.err <- ggplot(error.dt, aes(degree, log10(mse), color=set))+
-  geom_line()+
-  geom_point()+
-  geom_point(
-    color="black",
-    shape=1,
-    data=best.err)
-
-png("figure-quadratic.png", width=6, height=4, units="in", res=100)
-print(gg.err)
-dev.off()
+set.colors <- c(
+  train="black",
+  test="red")
+model.color <- "blue"
+viz <- animint(
+  funs=ggplot()+
+    scale_color_manual(values=set.colors)+
+    geom_point(aes(
+      x, y, color=set),
+      shape=1,
+      data=all.sets)+
+    geom_line(aes(
+      x, pred.y),
+      data=model.dt[min(all.sets$y) < pred.y & pred.y < max(all.sets$y)],
+      color=model.color,
+      showSelected="degree"),
+  error=ggplot()+
+    scale_color_manual(values=set.colors)+
+    geom_line(aes(
+      degree, log10(mse), color=set, group=set),
+      data=error.dt)+
+    geom_point(aes(
+      degree, log10(mse), color=set),
+      shape=1,
+      data=best.err)+
+    make_tallrect(error.dt, "degree", color="blue"))
+animint2dir(viz, "figure-quadratic-interactive")
+if(FALSE){
+  animint2gist(viz)
+}

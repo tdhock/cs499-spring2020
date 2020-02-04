@@ -1,0 +1,15 @@
+Demos of how to make figures in R
+
+[[file:Makefile][Makefile]] shows what output files are produced by what script.
+
+** ggplot2 demo (static figures)
+
+[[file:figure-quadratic.R][ggplot2 demo script]]
+
+[[file:figure-quadratic-funs.png]]
+
+[[file:figure-quadratic.png]]
+
+** bonus: interactive figure
+
+[[file:figure-quadratic-interactive.R][animint2 demo script]] ([[http://bl.ocks.org/tdhock/raw/dbdb6a7659070587826a7fcc18153735/][interactive figure]])

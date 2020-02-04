@@ -16,7 +16,8 @@ al., which is freely available online.
 ** Lectures
 
 - Jan 14: [[file:2020-01-14-applications/slides.pdf]]
-
+- Feb 4: [[file:2020-02-03-capacity/README.org][visualizing underfitting/overfitting in a 1d regression model
+  using ggplot2/animint2]].
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
