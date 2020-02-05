@@ -46,9 +46,9 @@ training data.
 
 *** Experiments/application: run your code on the following data sets
 - Data sets from [[https://web.stanford.edu/~hastie/ElemStatLearn/data.html]]: use [[https://cloud.r-project.org/web/packages/data.table/vignettes/datatable-intro.html][data.table::fread]] to read these CSV files into R:
-  - spam 2-class output is last column (spam).
-  - SAheart 2-class output is last column (chd), make sure to convert the famhist column to a binary indicator (0=Absent, 1=Present).
-  - zip.train: 10-class output is first column. (ignore
+  - spam:  output is last column (spam).
+  - SAheart:  output is last column (chd), make sure to convert the famhist column to a binary indicator (0=Absent, 1=Present).
+  - zip.train: output is first column. (ignore
     classes other than 0 and 1)
 - For each data set:
   - First scale the inputs (each column should have mean 0 and
