@@ -56,7 +56,13 @@ training data.
     dividing by the standard deviation of each column (or just use a
     standard function like scale in R).
   - (10 points) Second, randomly split the data into 60% train, 20%
-    validation, 20% test. In your report please include a table of
+    validation, 20% test. Make sure there is no overlap between any of the sets,
+    i.e. each data point is used in exactly one of the sets.
+    In R you can use the following code
+  #+BEGIN_SRC 
+    m <- 10;sample(rep(c("train", "validation", "test"), m*c(0.6, 0.2, 0.2)))
+  #+END_SRC
+    In your report please include a table of
     counts with a row for each set (train/validation/test) and a
     column for each class (0/1). In the text write a sentence which
     explains what class is most frequent in the train set, as that
