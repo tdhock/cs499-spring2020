@@ -83,7 +83,9 @@ set            0   1
     observations, number of columns = number of iterations).
   - (10 points) Plot error rate (percent incorrectly predicted labels) and
     logistic loss as a function of number of iterations, separately
-    for each set (black line for train, red line for validation). For
+    for each set (black line for train, red line for validation). 
+    Make sure the axes labels and legend text labels are large enough
+    (about the same size as the other text in your report). For
     example
   - [[file:../2019-04-04-neural-network-classification/figure-nnet-spam.png]]
   - (5 points) Make sure to include a legend or direct labels so the
@@ -102,7 +104,8 @@ set            0   1
     validation error? Either write the number in your text and/or on
     the figure. The corresponding column of weightMatrix is the one
     that you should use on the test data.
-  - (10 points) Make a table of error rates with three rows
+  - (10 points) Make a table of error rates 
+    (percent incorrectly predicted labels) with three rows
     (train/validation/test sets) and two columns (logistic regression
     and baseline). For the logistic regression (first column), use the
     weight vector that minimizes the validation error to make
@@ -118,8 +121,11 @@ set            0   1
     computation]]. Plot each model as a different colored curve in ROC
     space (y axis for TPR = True Positive Rate, x axis for FPR = False
     Positive Rate), e.g. logistic regression in blue, baseline in
-    violet.  Make sure to include a legend so the reader can tell what
-    color corresponds to what model.  For example
+    violet. Make sure to include a legend so the reader can tell what
+    color corresponds to what model. 
+    Make sure the axes labels and legend text labels are large enough
+    (about the same size as the other text in your report).
+    For example
   - [[file:1-ROC.PNG]]
   - (5 points) For each model plot a circle/dot in the same color that
     shows the FPR/TPR of the predictions at the default threshold.
