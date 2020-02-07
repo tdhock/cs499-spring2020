@@ -163,3 +163,8 @@ Extra credit:
   all three ROC curves in the same color, on the same axes, so the
   reader can see if the variance, and see if there is any significant
   difference between your learned model and the baseline.
+  
+FAQ
+- My code is too slow! If your code is too slow then I would suggest trying to optimize it -- for example in R you can replace for loops with matrix-vector operations to get substantial speedups.
+- What values should I use for the number of iterations and step size? I can't tell you what values to use, but you need to try several values until you see the train log loss always going down, and the validation should go down and then up again. (you can use different values for each data set)
+
