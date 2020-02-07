@@ -118,7 +118,10 @@ set            0   1
     predictions with respect to the test set. Please do NOT implement
     the ROC curve computation yourself; instead please use an existing
     package, [[https://github.com/tdhock/WeightedROC#comparison-with-other-r-packages-implementing-roc-curve-computation][here is a list of R packages that implement ROC curve
-    computation]]. Plot each model as a different colored curve in ROC
+    computation]]. 
+    For example you can use =?WeightedROC::WeightedROC= to get help on
+    how to use that function.
+    Plot each model as a different colored curve in ROC
     space (y axis for TPR = True Positive Rate, x axis for FPR = False
     Positive Rate), e.g. logistic regression in blue, baseline in
     violet. Make sure to include a legend so the reader can tell what
@@ -167,4 +170,4 @@ Extra credit:
 FAQ
 - My code is too slow! If your code is too slow then I would suggest trying to optimize it -- for example in R you can replace for loops with matrix-vector operations to get substantial speedups.
 - What values should I use for the number of iterations and step size? I can't tell you what values to use, but you need to try several values until you see the train log loss always going down, and the validation should go down and then up again. (you can use different values for each data set)
-
+- How to use function X in package Y of language Z? Read the manual! For example in R you can type =?pkg::fun= to get help on any function =fun= from any package =pkg=.
