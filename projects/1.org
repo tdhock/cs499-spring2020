@@ -28,7 +28,9 @@ training data.
     take. 
 - (5 points) The function should declare a variable called
   weightVector which is initialized to the zero vector (one element
-  for each feature).
+  for each feature). 
+  This is the parameter vector (theta) which is used to obtain predicted 
+  values along with an input x vector (by taking the dot product).
 - (5 points) There should be a variable called weightMatrix of real
   numbers (number of rows = number of input features, number of
   columns = maxIterations).
