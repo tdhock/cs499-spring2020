@@ -89,7 +89,11 @@ algorithm.
   -- predict most frequent class, (2) NearestNeighborsCV, (3) overfit
   1-nearest neighbors model. Plot the resulting test error values as a
   function of the data set, in order to show that the
-  NearestNeighborsCV is more accurate than the other two models.
+  NearestNeighborsCV is more accurate than the other two
+  models. Example:
+
+[[file:2-test-accuracy.png]]
+
 
 *** Grading rubric (out of 120 points)
 
@@ -100,10 +104,16 @@ from the rubric above.
 Your group should submit a PDF on BBLearn. 
 - The first thing in the PDF should be your names and student ID's
   (e.g. th798) and a link to your source code in a public repo
-  (e.g. github).
+  (e.g. github, there should be no code in your PDF report).
+- The second thing in the PDF should be your group evaluation scores
+  for yourself and your teammates.
 
 Extra credit: 
 - 10 points if your github repo includes a README.org (or README.md
   etc) file with a link to the source code of your GradientDescent
   function, and an explanation about how to run it on the data sets.
+- 10 points if you run your GradientDescent function through KFoldCV
+  as well, and show results for that as another algorithm in your test
+  error figure.
+  
   
