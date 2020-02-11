@@ -4,6 +4,60 @@ In this project your goal is to implement K-Fold cross-validation,
 then use it with machine learning algorithms to (1) train
 hyper-parameters and (2) compare prediction accuracy.
 
+For this project it is strongly encouraged to use R packages
+data.table and ggplot2 for data reading and visualization, [[file:2.R][See
+example/demo R script]] and additional code below:
+
+#+BEGIN_SRC R
+  ## install package if it is not already.
+  if(!require("data.table")){
+    install.packages("data.table")
+  }
+
+  ## attach all functions provided by these packages.
+  library(data.table)
+  library(ggplot2)
+
+  ## download spam data set to local directory, if it is not present.
+  if(!file.exists("spam.data")){
+    download.file("https://web.stanford.edu/~hastie/ElemStatLearn/datasets/spam.data", "spam.data")
+  }
+
+  ## Read spam data set and conver to X matrix and y vector we need for
+  ## gradient descent.
+  spam.dt <- data.table::fread("spam.data")
+  N.obs <- nrow(spam.dt)
+  X.raw <- as.matrix(spam.dt[, -ncol(spam.dt), with=FALSE]) 
+  y.vec <- spam.dt[[ncol(spam.dt)]]
+  X.sc <- scale(X.raw) #scaled X/feature/input matrix.
+
+  ## compute and visualize validation error as a function of number of
+  ## neighbors.
+  result <- NearestNeighborsCV(X.sc, y.vec)
+  ggplot()+
+    geom_line(aes(
+      neighbors, error.percent, group=validation.fold),
+      data=validation.error)
+
+  ## compute and visualize test error results:
+  err.dt.list <- list()
+  ## assign folds.
+  for(test.fold in 1:5){
+    ## split into train/test sets.
+    for(algorithm in c("baseline", "1-NN", "NNCV")){
+      ## run algorithm and store test error.
+      err.dt.list[[paste(test.fold, algorithm)]] <- data.table(
+	test.fold, algorithm, error.percent)
+    }
+  }
+  err.dt <- do.call(rbind, err.dt.list)
+
+  ggplot()+
+    geom_point(aes(
+      error.percent, algorithm),
+      data=err.dt)
+#+END_SRC
+
 *** Algorithm/function: KFoldCV
 
 The goal of this exercise is to code the K-Fold Cross-Validation
@@ -20,7 +74,8 @@ algorithm.
     X_new).
   - fold_vec, a vector of integer fold ID numbers (from 1 to K).
 - (5 points) The function should begin by initializing a variable
-  called error_vec, a numeric vector of size K.
+  called error_vec, a numeric vector of size K, to be filled with the
+  mean validation error for each fold.
 - (20 points) The function should have a for loop over the unique
   values k in fold_vec (should be from 1 to K). During each iteration
   k you should
