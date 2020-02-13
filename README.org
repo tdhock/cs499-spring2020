@@ -25,7 +25,9 @@ al., which is freely available online.
 ** Coding projects
 
 - [[file:projects/1.org][1: gradient descent algorithm for logistic regression]], due Fri Feb 7
-  @ 11:59PM.
+  @ 11:59PM. (deadline for revisions: email me your revised PDF along
+  with a list of the rubric items that you would like me to
+  re-consider, by Fri Feb 14 @ 11:59PM)
 - [[file:projects/2.org][2: K-fold cross-validation]], due Fri Feb 21 @ 11:59PM.
 - 3, due Fri Mar 6 @ 11:59PM.
 - 4, due Fri Apr 3 @ 11:59PM.
