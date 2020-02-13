@@ -1,5 +1,7 @@
 library(data.table)
 library(ggplot2)
+
+## define variables which are specific to each data set.
 prefix <- "https://web.stanford.edu/~hastie/ElemStatLearn/datasets/"
 data.list <- list(
   "spam.data"=list(
@@ -9,9 +11,11 @@ data.list <- list(
     step.size=0.1,
     label.fun=function(dt)ncol(dt)),
   "zip.train.gz"=list(
+    step.size=0.9,
     ignore=function(y)! y %in% c(0,1),
     label.fun=function(dt)1))
 
+## code to run on each data set.
 for(f in names(data.list)){
   if(!file.exists(f)){
     u <- paste0(prefix, f)
@@ -20,10 +24,15 @@ for(f in names(data.list)){
   full.dt <- data.table::fread(f)
   data.info <- data.list[[f]]
   label.col.id <- data.info$label.fun(full.dt)
+  print(label.col.id)
   X.raw <- as.matrix(full.dt[, -label.col.id, with=FALSE])
   y.vec <- full.dt[[label.col.id]]
+  is.01 <- y.vec == 0 | y.vec == 1
+  X.01 <- X.raw[is.01, ]
+  y.01 <- y.vec[is.01]
 }
 
+## Read spam data and scale.
 spam.dt <- data.table::fread("spam.data")
 N.obs <- nrow(spam.dt)
 X.raw <- as.matrix(spam.dt[, -ncol(spam.dt), with=FALSE])
@@ -31,21 +40,32 @@ y.vec <- spam.dt[[ncol(spam.dt)]]
 yt.vec <- ifelse(y.vec==1, 1, -1)
 X.sc <- scale(X.raw)
 
-set.seed(1)
-prop.vec <- (1:nrow(X.sc))/N.obs
+## Compute random assignment into train/validation/test sets, and
+## count of each.
+set.seed(1) # set random number generator for reproducibility.
+prop.vec <- (1:N.obs)/N.obs
 set.vec <- sample(ifelse(
   prop.vec < 0.6, "train", ifelse(
     prop.vec < 0.8, "validation", "test")))
+head(set.vec)
 table(set.vec)/N.obs
 (count.tab <- table(set.vec, y.vec))
 count.train <- count.tab["train",]
-most.freq.yt <- ifelse(names(count.train)[which.max(count.train)]==1, 1, -1)
+(most.freq.yt <- ifelse(names(count.train)[which.max(count.train)]==1, 1, -1))
 
 computeGradient <- function(X, y.tilde, weightVector){
-  pred.vec <- X %*% weightVector
+  pred.vec <- X %*% weightVector # theta^T x(i)
   in.exp <- y.tilde * pred.vec
   denominator <- as.numeric(1+exp(in.exp))
   colMeans(-as.numeric(y.tilde) * X / denominator)
+}
+
+(grad.mat <- matrix(NA, 5, 2))
+for(i in 1:nrow(X)){
+  x.vec <- X[i,]
+  pred <- t(weightVector) %*% x.vec
+  denom <- 1+exp(y.tilde[i]*pred)
+  grad.mat[i,] <- -y.tilde[i]*x.vec/denom
 }
 
 GradientDescent <- function(X, y.tilde, step.size, max.iterations){
