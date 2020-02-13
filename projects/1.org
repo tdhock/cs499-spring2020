@@ -10,6 +10,9 @@ If you have never done any plotting before, I would recommend reading
 for the animint2 package, which has basically the same syntax (but is
 for interactive plots).
 
+Please use [[file:1.R][this demo script]] for inspiration but do not copy/paste code
+from it (that would be plagiarism).
+
 *** Algorithm/function: GradientDescent
 The goal of this exercise is to code the gradient descent algorithm
 (also known as steepest descent) which iteratively computes linear

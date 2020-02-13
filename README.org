@@ -19,14 +19,15 @@ al., which is freely available online.
 - Feb 4: [[file:2020-02-03-capacity/README.org][visualizing underfitting/overfitting in a 1d regression model
   using ggplot2/animint2]].
 - Feb 11: [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch10-nearest-neighbors.html][Nearest Neighbors interactive data viz]].
+- Feb 13: [[file:projects/2.R][project 2 coding demo]], [[file:projects/1.R][project 1 suggestions]].
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
 
-Late submissions will not be accepted.
-
 - [[file:projects/1.org][1: gradient descent algorithm for logistic regression]], due Fri Feb 7
-  @ 11:59PM.
+  @ 11:59PM. (deadline for revisions: email me your revised PDF along
+  with a list of the rubric items that you would like me to
+  re-consider, by Fri Feb 14 @ 11:59PM)
 - [[file:projects/2.org][2: K-fold cross-validation]], due Fri Feb 21 @ 11:59PM.
 - 3, due Fri Mar 6 @ 11:59PM.
 - 4, due Fri Apr 3 @ 11:59PM.
