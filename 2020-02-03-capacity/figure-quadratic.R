@@ -9,7 +9,7 @@ x.dt <- data.table(x=x.vec)
 f.dt <- data.table(x.dt, pred.y=f(x.vec), fun="true")
 ggplot()+
   geom_line(aes(
-    x, pred.y, color=fun),
+    x=x, y=pred.y, color=fun),
     data=f.dt)
 
 generate.data <- function(N.data){

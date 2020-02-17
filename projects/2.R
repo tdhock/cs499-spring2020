@@ -12,7 +12,7 @@ X.sc <- scale(X.raw)
 
 set.seed(1)
 n.folds <- 5
-fold.vec <- rep(1:n.folds, l=nrow(X.sc))
+fold.vec <- sample(rep(1:n.folds, l=nrow(X.sc)))
 
 err.dt.list <- list()
 for(validation.fold in 1:n.folds){
