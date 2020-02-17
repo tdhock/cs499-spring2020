@@ -1,0 +1,25 @@
+Why do ROC curve analysis?
+
+Why not just use test error/accuracy?
+
+Here is an example, for three algorithms on a problem related to
+classifying presence/absence of Sugar Maple trees at various
+geographic locations.
+- glmnet: L1-regularized linear model.
+- major.class: trivial baseline which always predicts the most
+  frequent class in the train set.
+- xgboost: shallow nonlinear learner (boosted decision trees).
+
+[[file:figure-batchtools-expired-earth-metrics-default-Sugar-Maple.png]]
+
+Which algorithm should we use for prediction?
+
+Interactive ROC curve data visualizations:
+
+- [[http://bl.ocks.org/tdhock/raw/eab2a3e0050fa972d99a61c037cf2d7d/][two panels smooth transitions]].
+
+- [[http://bl.ocks.org/tdhock/raw/c76f05789df48400a7628085470c4823/][three panels smooth transitions]] functions of threshold.
+
+- [[http://bl.ocks.org/tdhock/raw/172d0f68a51a8de5d6f1bed7f23f5f82/][roc + class balance errors + error metric comparison]].
+
+- [[http://bl.ocks.org/tdhock/raw/a70c21c27665f14d4591c1fe9b2b730f/][All four linked plots]].

@@ -20,6 +20,7 @@ al., which is freely available online.
   using ggplot2/animint2]].
 - Feb 11: [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch10-nearest-neighbors.html][Nearest Neighbors interactive data viz]].
 - Feb 13: [[file:projects/2.R][project 2 coding demo]], [[file:projects/1.R][project 1 suggestions]].
+- Feb 18: [[file:2020-02-18-why-roc/README.org][ROC curve data visualizations]].
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects

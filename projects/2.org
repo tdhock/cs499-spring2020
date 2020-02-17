@@ -170,5 +170,10 @@ Extra credit:
 - 10 points if you run your GradientDescent function through KFoldCV
   as well, and show results for that as another algorithm in your test
   error figure.
-  
+- 10 points if you compute and plot ROC curves for each (test fold,
+  algorithm) combination. Make sure each algorithm is drawn in a
+  different color, and there is a legend that the reader can use to
+  read the figure. Example:
+
+[[file:1-ROC.PNG]]
   
