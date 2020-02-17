@@ -71,8 +71,10 @@ algorithm.
   - ComputePredictions, a function that takes three inputs
     (X_train,y_train,X_new), trains a model using X_train,y_train,
     then outputs a vector of predictions (one element for every row of
-    X_new).
-  - fold_vec, a vector of integer fold ID numbers (from 1 to K).
+    X_new). To provide a function with a compatible argument list, 
+    you probably will need to write a wrapper around some other function,
+    e.g. wrap_knn <- function(X_train,y_train,X_new)class::knn(X_train,X_new,y_train)
+  - fold_vec, a vector (same size as y_vec) of integer fold ID numbers (from 1 to K, repeated many times).
 - (5 points) The function should begin by initializing a variable
   called error_vec, a numeric vector of size K, to be filled with the
   mean validation error for each fold.
