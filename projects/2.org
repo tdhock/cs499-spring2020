@@ -104,7 +104,7 @@ algorithm.
   - num_folds, default value 5.
   - max_neighbors, default value 20.
 - (5 points) randomly create a variable called validation_fold_vec (same number of entries as observations in y_vec/X_mat), a
-  vector with integer values from 1 to num_folds.
+  vector with integer values from 1 to num_folds. e.g. n.folds <- 5; fold.vec <- sample(rep(1:n.folds, l=nrow(X.sc)))
 - (5 points) initialize a variable called error_mat, a numeric matrix
   (num_folds x max_neighbors).
 - (5 points) There should be a for loop over num_neighbors from 1 to
