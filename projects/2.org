@@ -103,7 +103,7 @@ algorithm.
     compute predictions.
   - num_folds, default value 5.
   - max_neighbors, default value 20.
-- (5 points) randomly create a variable called validation_fold_vec, a
+- (5 points) randomly create a variable called validation_fold_vec (same number of entries as observations in y_vec/X_mat), a
   vector with integer values from 1 to num_folds.
 - (5 points) initialize a variable called error_mat, a numeric matrix
   (num_folds x max_neighbors).
