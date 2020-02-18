@@ -84,7 +84,7 @@ algorithm.
   k you should
   - first define X_new,y_new based on the observations for which the
     corresponding elements of fold_vec are equal to the current fold
-    ID k.
+    ID k. (new=either validation or test set)
   - then define X_train,y_train using all the other observations.
   - then call ComputePredictions and store the result in a variable
     named pred_new.
@@ -103,7 +103,8 @@ algorithm.
   - y_vec, a vector of binary outputs (the corresponding label for each
     observation, either 0 or 1).
   - X_new, a matrix of numeric inputs/features for which we want to
-    compute predictions.
+    compute predictions. (when you call this function in the context
+    of KFoldCV, X_new will be the test data matrix)
   - num_folds, default value 5.
   - max_neighbors, default value 20.
 - (5 points) randomly create a variable called validation_fold_vec (same number of entries as observations in y_vec/X_mat), a
@@ -152,7 +153,6 @@ algorithm.
 
 [[file:2-test-accuracy.png]]
 
-
 *** Grading rubric (out of 120 points)
 
 Your final grade for this project will be computed by multiplying the
@@ -170,8 +170,9 @@ Extra credit:
 - 10 points if your github repo includes a README.org (or README.md
   etc) file with a link to the source code of your GradientDescent
   function, and an explanation about how to run it on the data sets.
-- 10 points if in your plot of validation error versus number of neighbors, 
-  you include a separate line for each fold (in addition to the bold mean line requested above).
+- 10 points if in your plot of validation error versus number of
+  neighbors, you include a separate line for each fold (in addition to
+  the bold mean line requested above).
 - 10 points if you run your GradientDescent function through KFoldCV
   as well, and show results for that as another algorithm in your test
   error figure.
@@ -182,3 +183,6 @@ Extra credit:
 
 [[file:1-ROC.PNG]]
   
+- 10 points if you compute area under the ROC curve (AUC) and include
+  that as another evaluation metric (in a separate panel/plot) to
+  compare the test accuracy of the algorithms.
