@@ -186,3 +186,7 @@ Extra credit:
 - 10 points if you compute area under the ROC curve (AUC) and include
   that as another evaluation metric (in a separate panel/plot) to
   compare the test accuracy of the algorithms.
+  
+** FAQ
+
+- Given only 2 data points (or any even number), how do you make sure the algorithm functions properly?  For example, with 2 nearest neighbors, if one neighbor is 0 and the other is 1, how do we predict the current value? Given an even number of neighbors in binary classification, there is a possibility of a tie. In that case there are various rules for breaking the ties (e.g. select one of the classes at random, select the most frequent class in the train data) and hopefully it doesn't matter which rule you use. One of them should be implemented in whatever library function you are using (e.g. class::knn in R uses the random selection).
