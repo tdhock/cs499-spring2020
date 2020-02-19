@@ -122,7 +122,7 @@ algorithm.
 - (5 points) Compute a variable called mean_error_vec (size
   max_neighbors) by taking the mean of each column of error_mat.
 - (5 points) Compute a variable called best_neighbors which is the
-  number of neighbors with minimal error.
+  number of neighbors with minimal error. This is the number of neighbors you should use to make predictions on X_new.
 - (5 points) Your function should output a list with elements for
   (1) the predictions for X_new,
   using the entire X_mat,y_vec with best_neighbors; (2) the
