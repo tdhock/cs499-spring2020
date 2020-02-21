@@ -189,5 +189,6 @@ Extra credit:
   
 ** FAQ
 
+- how to debug R code? you should use traceback() to find out where the error is happening, the put print statements or browser() on the line just before the error, so you can see what is going on and debug.
 - Given only 2 data points (or any even number), how do you make sure the algorithm functions properly?  For example, with 2 nearest neighbors, if one neighbor is 0 and the other is 1, how do we predict the current value? Given an even number of neighbors in binary classification, there is a possibility of a tie. In that case there are various rules for breaking the ties (e.g. select one of the classes at random, select the most frequent class in the train data) and hopefully it doesn't matter which rule you use. One of them should be implemented in whatever library function you are using (e.g. class::knn in R uses the random selection).
 - for making data tables to visualize using ggplot2 you may want to use [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch17-appendix.html#list-of-data-tables][the list of data tables idiom]].
