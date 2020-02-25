@@ -5,54 +5,76 @@ descent algorithm for a neural network with one hidden layer.
 
 ** Algorithm: stochastic gradient descent with early stopping regularization
 Function name: NNetOneSplit
-- Inputs: X.mat (feature matrix, n_observations x n_features), y.vec
-  (label vector, n_observations x 1), max.iterations (int scalar > 1),
-  step.size, n.hidden.units (number of hidden units), is.train
-  (logical vector of size n_observations, TRUE if the observation is
-  in the train set, FALSE for the validation set).
-- Output: list/dictionary/etc with at least three named elements:
-  - V.mat best weight matrix (n_features x n.hidden.units), used to
+- (10 points) Inputs should be: 
+  - X.mat (train inputs/feature matrix, n_observations x n_features), 
+  - y.vec (train outputs/label vector, n_observations x 1), 
+  - max.epochs (int scalar > 1),
+  - step.size (double scalar > 0), 
+  - n.hidden.units (int scalar>1, number of hidden units), 
+  - is.subtrain (logical vector, size n_observations)
+- (10 points) begin by dividing X.mat/y.vec into
+  X.subtrain/X.validation/y.subtrain/y.validation using is.subtrain.
+- (10 points) the algorithm should initialize V.mat/w.vec to some random numbers
+  close to zero (e.g. using rnorm in R). 
+  - V.mat is a weight matrix (n_features x n.hidden.units), used to
     predict hidden units given inputs.
-  - w.vec best weight vector (n.hidden.units), used to predict output
+  - w.vec is a weight vector (n.hidden.units), used to predict output
     given hidden units.
+- (10 points) There should be a for loop over epochs from k=1 to
+  max.epochs. Each epoch is a single pass through the subtrain set. In
+  other words, in each epoch, you will update the parameters using the
+  gradients with respect to each subtrain observation.
+- (10 points) for each epoch there should be a for loop over data
+  points in the subtrain set. During each iteration of this inner loop you
+  should compute the gradients of V.mat/w.vec with respect to a
+  a single observation in the subtrain set, then update
+  V.mat/w.vec by taking a step (scaled by step.size) in the negative
+  gradient direction.
+- (10 points) the last thing you should do during each epoch is, after
+  having gone through all the data points in the subtrain set, compute
+  the logistic loss on the subtrain/validation sets, and store those
+  in a variable called loss.values.
+- (10 points) Outputs should be a list/dictionary/etc with at least three named elements:
   - loss.values, a matrix/data.table/etc which stores the logistic
-    loss with respect to the train/validation set for each iteration.
-- the algorithm should initialize V.mat/w.vec to some random numbers
-  close to zero (e.g. using rnorm in R).
-- During each iteration from k=1 to max.iterations you should compute
-  the gradients of V.mat/w.vec with respect to a randomly selected
-  observation, then update V.mat/w.vec by taking a step (scaled by
-  step.size) in the negative gradient direction.
-- At each iteration you should compute the logistic loss on the
-  train/validation sets, and store those in loss.values.
-- After max.iterations you should compute a variable called
-  best.iterations which is equal to the number of iterations that
-  minimizes the validation loss.
+    loss with respect to the subtrain/validation set for each epoch.
+  - V.mat, the weight matrix after having done gradient descent for
+    the specified number of epochs (max.epochs).
+  - w.vec, the weight vector after having done gradient descent for
+    the specified number of epochs (max.epochs).
 
 ** Experiments/application
 
 - Use spam data set from
   [[https://web.stanford.edu/~hastie/ElemStatLearn/data.html]]
-- First scale the inputs (each column should have mean 0 and variance
-  1). You can do this by subtracting away the mean and then dividing
-  by the standard deviation of each column (or just use a standard
-  function like scale in R).
-- (10 points) Use NNetOneSplit with the whole data set as
-  X.mat/y.vec. For is.train, randomly assign 60% train and 40%
-  validation.
-- (10 points) Plot the train/validation loss as a function of the
-  number of iterations, and draw a point to emphasize the minimum of
-  each curve.
-- (10 points) the train loss should always go down, whereas the
-  validation loss should go down and then start going up after a
-  certain number of iterations. If it does not, try decreasing
-  step.size and increasing max.iterations.
-- (10 points) Use 4-fold cross validation to compare the prediction
-  accuracy of two algorithms: (1) baseline/underfit -- predict most
-  frequent class, (2) NNetOneSplit. Plot the resulting test accuracy
-  values as a function of the data set. Example:
-
-[[file:2-test-accuracy.png]]
+- First scale the input matrix (each column should have
+  mean 0 and variance 1). You can do this by subtracting away the mean
+  and then dividing by the standard deviation of each column (or just
+  use a standard function like scale in R).
+- (5 points) Next create a variable is.train (logical vector with size
+  equal to the number of observations in the whole data set). Each
+  element is TRUE if the corresponding observation (row of input
+  matrix) is in the train set, and FALSE otherwise. There should be
+  80% train, 20% test observations (out of all observations in the
+  whole data set).
+- (5 points) Next create a variable is.subtrain (logical vector with
+  size equal to the number of observations in the train set). Each
+  element is TRUE if the corresponding observation is is the subtrain
+  set, and FALSE otherwise. There should be 60% subtrain, 40%
+  validation observations (out of 100% train observations).
+- (5 points) Use NNetOneSplit with the train set as X.mat/y.vec, with
+  is.subtrain as specified above, and a large number for max.epochs.
+- (5 points) Plot the subtrain/validation loss as a function of the
+  number of epochs, and draw a point to emphasize the minimum of
+  the validation loss curve. 
+- (5 points) Define a variable called best_epochs which is the number
+  of epochs which minimizes the validation loss. Use NNetOneSplit with
+  the train set as X.mat/y.vec, but this time use is.subtrain=TRUE for
+  all observations, and use max.epochs=best_epochs.
+- (5 points) Finally use the learned V.mat/w.vec to make predictions
+  on the test set. What is the prediction accuracy? (percent correctly
+  predicted labels in the test set) What is the prediction accuracy of
+  the baseline model which predicts the most frequent class in the
+  train labels? 
 
 *** Grading rubric 
 
@@ -69,13 +91,16 @@ Your group should submit a PDF on BBLearn.
 
 Extra credit: 
 - 10 points if your github repo includes a README.org (or README.md
-  etc) file with a link to the source code of your GradientDescent
+  etc) file with a link to the source code of your NNOneSplit
   function, and an explanation about how to run it on the data sets.
+- 10 points if you do 4-fold cross-validation instead of the single
+  train/test split described above, and you make a plot of accuracy
+  for both models for each split/fold.
 - 10 points if you show GradientDescent (from project 1, logistic regression with
   number of iterations selected by a held-out validation set) in your
-  test accuracy figure as a baseline.
+  test accuracy result figure.
 - 10 points if you show NearestNeighborsCV (from project 2) in your
-  test accuracy figure as a baseline.
+  test accuracy figure.
 - 10 points if you compute and plot ROC curves for each (test fold,
   algorithm) combination. Make sure each algorithm is drawn in a
   different color, and there is a legend that the reader can use to
@@ -93,5 +118,5 @@ Extra credit:
   the error is happening, the put print statements or browser() on the
   line just before the error, so you can see what is going on and
   debug.
-- Given only 2 data points (or any even number), how do you make sure the algorithm functions properly?  For example, with 2 nearest neighbors, if one neighbor is 0 and the other is 1, how do we predict the current value? Given an even number of neighbors in binary classification, there is a possibility of a tie. In that case there are various rules for breaking the ties (e.g. select one of the classes at random, select the most frequent class in the train data) and hopefully it doesn't matter which rule you use. One of them should be implemented in whatever library function you are using (e.g. class::knn in R uses the random selection).
-- for making data tables to visualize using ggplot2 you may want to use [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch17-appendix.html#list-of-data-tables][the list of data tables idiom]].
+- for making data tables to visualize using ggplot2 you may want to
+  use [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch17-appendix.html#list-of-data-tables][the list of data tables idiom]].
