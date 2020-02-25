@@ -108,4 +108,170 @@ KL-divergence.
 
 Introduce project 1 (gradient descent for logistic regression).
 
+\section{Numerical computation}
+
+Gradient, Jacobian, Hessian.
+
+\section{Learning algorithms}
+
+Task $T$: robot learning to walk, classification, regression,
+transcription (sound/image to text), translation, etc.
+
+Performance measure/metric $P$: specific to task, often difficult
+choice. Partial credit for complex tasks, e.g. whole sentence vs word
+in machine translation.
+
+Experience: supervised data set is a collection of examples, design matrix/label
+vector. Other settings: unsupervised, semi-supervised, multi-instance,
+reinforcement.
+
+e.g. linear regression, MSE on test set.
+
+Q: project 1 task/perf/exp?
+
+\section{Capacity, overfitting, underfitting}
+
+Goal is generalization, which is accurate prediction on new, unseen
+test data. Expected value of error on new input (average over samples
+in test set).
+
+Q: how do we minimize test error if we only have train samples? Must
+assume train and test are drawn iid from same distribution.
+
+Goal is to have an algo that minimizes train error (avoid
+underfitting) and minimizes the gap between train/test error (avoid
+overfitting).
+
+Capacity/complexity/size is the ability of a model to fit a wide
+variety of functions. Draw train/validation error as a function of
+model complexity.
+
+Quiz: L2 regularization overfitting plot.
+
+\section{Cross-validation}
+
+Regularization = techniques to simplify model and avoid overfitting
+(my definition), modification to reduce generalization error but not
+train error (book definition).
+
+Three examples of regularization parameters: (1) iterations, (2)
+penalty, (3) polynomial degree.
+
+Parameter vs hyper-parameter. Hyper: must first be fixed before
+running learning algorithm. Regular: values found using learning
+algorithm.
+
+How to select the regularization/hyper-parameters? Need held out
+validation samples (which are not given to the learning algorithm
+which computes parameters).
+
+KFoldCV algo. Input Data D, Algo A, Loss L, folds K. Output validation
+error vector.
+
+Quiz: in nearest neighbors, what is the number of neighbors which
+results in the most complex model?
+
+\section{Fully connected multi-layer Neural Networks}
+
+Want to learn a real-valued prediction function
+$f(x)=f^{(L)}[\cdots f^{(1)}[x] ]\in\mathbb R$ which is the repeated
+application of $L$ different functions.
+
+Each function $l\in\{1,\dots, L\}$ is a matrix multiplication followed
+by an activation function: $f^{(l)}[z] = \sigma^{(l)}[ W^{(l)} z ]$
+where $W^{(l)}\in\mathbb R^{u^{(l)}\times u^{(l-1)}}$ and
+$z\in\mathbb R^{u^{(l-1)}}$. The last activation function must return
+a real number prediction so it is fixed to the identity:
+$\sigma^{(L)}[z]=z$. The other activation functions must be
+non-linear, e.g. relative linear units (ReLU) $\sigma(z)=(z)_+$,
+logistic/sigmoid $\sigma(z)=1/(1+\exp(-z))$. For binary classification
+with inputs $x\in\mathbb R^n$, the overall neural network architecture
+is $(u^{(0)}=n, u^{(1)}, \dots, u^{(L-1)}, u^{(L)}=1)$, where
+$u^{(1)},\dots, u^{(L)}\in\mathbb Z_+$ are positive integers
+(hyper-parmeters that control the number of units in each hidden
+layer, and the size of the parameter matrices $W^{(l)}$).
+
+Neural network diagrams show how each hidden unit is computed by
+applying the weights to the values of the hidden units at the previous
+layer.
+
+We can write the units at each layer as
+$h^{(0)},h^{(1)},\dots, h^{(L-1)}, h^{(L)}$ where
+$h^{(0)}=x\in\mathbb R^n$ is an input feature vector, and
+$h^{(L)}\in\mathbb R$ is the predicted output (real-valued score). For
+each layer $l\in \{1, \dots, L\}$ we have:
+\begin{equation}
+  \label{eq:h_l}
+  h_l = f^{(l)}\left[h^{(l-1)}\right] =
+  \sigma^{(l)}\left[ W^{(l)} h^{(l-1)} \right].
+\end{equation}
+
+Total number of parameters to learn is
+$\sum_{l=1}^L u^{(l)} u^{(l-1)}.$ Quiz: how many parameters in a
+neural network for $n=10$ inputs/features with one hidden layer with
+$u=100$ units?
+
+Stochastic gradient descent with randomly selected observation.
+
+\section{Forward and Back-propagation algorithms}
+
+Stochastic gradient descent with epochs. Need gradient of loss with
+respect to weights. To do that we use forward propagation then back
+propagation.
+
+Forward propagation is the computation of hidden units
+$h^{(1)},\dots,h^{(L)}$ given the inputs $x$ and current parameters
+$W^{(1)},\dots,W^{(L)}$. Algorithm pseudocode, for loop over layers.
+
+Back propagation is the computation of gradients given current
+parameters and hidden units. Global diagram start at the bottom right
+with $x=h^{(0)}$, go up left to $a^{(1)}$, keep going up to up left
+$a^{(L)}=h^{(L)}=\hat y$, then finally the loss $J$. Local diagram
+start at the bottom right with $h^{(l-1)}$, go up left to $a^{(l)}$,
+keep going to up left $a^{(l+1)}$. The logistic loss in binary
+classification is
+\begin{equation}
+  J = \log[1+\exp(-\tilde y h^{(L)})].
+\end{equation}
+
+Scalar chain rule formula to keep in mind when deriving back-prop is
+\begin{equation}
+  \frac{d J}{d v} = \frac{d J}{d z} \frac{d z}{d v},
+\end{equation}
+where $v$ is the variable for which we want to compute the gradient
+(current node in computation graph), and $z$ is the next node up.
+
+To do SGD we need the gradient of the loss with respect to the weight
+matrix (write dimensions):
+\begin{eqnarray}
+  \nabla_{w_k^{(l)}} J
+  &=& \left( \frac{d}{d a_k^{(l)}} J \right)
+      \left( \nabla_{w_k^{(l)}} a_k^{(l)} \right) =
+      \left( \frac{d}{d a_k^{(l)}} J \right)
+      h^{(l-1)}\\
+  \nabla_{w^{(l)}} J
+  &=& \left(\nabla_{a^{(l)}} J\right)
+      \left( h^{(l-1)} \right)^T
+\end{eqnarray}
+Then we compute the gradient of the loss with respect to the hidden
+units before activation:
+\begin{eqnarray}
+  \nabla_{a^{(l)}} J
+  &=& \left(\nabla_{h^{(l)}} J\right) \odot
+      \left(\nabla_{a^{(l)}} h^{(l)} \right) \\
+  &=& \left(\nabla_{h^{(l)}} J\right) \odot \left(h^{(l)}[1-h^{(l)}]\right).\label{eq:logistic-activation}
+\end{eqnarray}
+The last equation~(\ref{eq:logistic-activation}) is only valid for the
+logistic/sigmoid activation funciton.
+
+Then we compute the gradient of the loss with respect to the hidden
+units:
+\begin{eqnarray}
+  \nabla_{h^{(l)}} J
+  &=& \left(\nabla_{a^{(l+1)}} J\right)
+      \left(\nabla_{h^{(l)}} a^{(l+1)}\right)\\
+  &=& \left(\nabla_{a^{(l+1)}} J\right)
+      \left(W^{(l+1)}\right)^T
+\end{eqnarray}
+
 \end{document}
