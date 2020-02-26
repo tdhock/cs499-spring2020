@@ -33,7 +33,8 @@ Function name: NNetOneSplit
 - (10 points) the last thing you should do during each epoch is, after
   having gone through all the data points in the subtrain set, compute
   the logistic loss on the subtrain/validation sets, and store those
-  in a variable called loss.values.
+  in a variable called loss.values. Remember the logistic loss is:
+  log[1+exp(-yf(x))] where y is a label in {-1,1} and f(x) is a real-valued prediction.
 - (10 points) Outputs should be a list/dictionary/etc with at least three named elements:
   - loss.values, a matrix/data.table/etc which stores the logistic
     loss with respect to the subtrain/validation set for each epoch.
