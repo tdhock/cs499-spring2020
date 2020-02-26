@@ -13,7 +13,7 @@ Function name: NNetOneSplit
   - n.hidden.units (int scalar>1, number of hidden units), 
   - is.subtrain (logical vector, size n_observations)
 - (10 points) begin by dividing X.mat/y.vec into
-  X.subtrain/X.validation/y.subtrain/y.validation using is.subtrain.
+  X.subtrain/X.validation/y.subtrain/y.validation using is.subtrain -- subtrain set is for computing gradients, validation set is for choosing the optimal number of steps (with minimal loss).
 - (10 points) the algorithm should initialize V.mat/w.vec to some random numbers
   close to zero (e.g. using rnorm in R). 
   - V.mat is a weight matrix (n_features x n.hidden.units), used to
