@@ -71,8 +71,11 @@ algorithm.
   - ComputePredictions, a function that takes three inputs
     (X_train,y_train,X_new), trains a model using X_train,y_train,
     then outputs a vector of predictions (one element for every row of
-    X_new).
-  - fold_vec, a vector of integer fold ID numbers (from 1 to K).
+    X_new). To provide a function with a compatible argument list, 
+    you probably will need to write a wrapper around some other function,
+    e.g. wrap_knn <- function(X_train,y_train,X_new)class::knn(X_train,X_new,y_train)
+    See [[https://swcarpentry.github.io/r-novice-inflammation/02-func-R/][Software carpentry R function tutorial]] for more info.
+  - fold_vec, a vector (same size as y_vec) of integer fold ID numbers (from 1 to K, repeated many times).
 - (5 points) The function should begin by initializing a variable
   called error_vec, a numeric vector of size K, to be filled with the
   mean validation error for each fold.
@@ -81,7 +84,7 @@ algorithm.
   k you should
   - first define X_new,y_new based on the observations for which the
     corresponding elements of fold_vec are equal to the current fold
-    ID k.
+    ID k. (new=either validation or test set)
   - then define X_train,y_train using all the other observations.
   - then call ComputePredictions and store the result in a variable
     named pred_new.
@@ -100,11 +103,12 @@ algorithm.
   - y_vec, a vector of binary outputs (the corresponding label for each
     observation, either 0 or 1).
   - X_new, a matrix of numeric inputs/features for which we want to
-    compute predictions.
+    compute predictions. (when you call this function in the context
+    of KFoldCV, X_new will be the test data matrix)
   - num_folds, default value 5.
   - max_neighbors, default value 20.
-- (5 points) randomly create a variable called validation_fold_vec, a
-  vector with integer values from 1 to num_folds.
+- (5 points) randomly create a variable called validation_fold_vec (same number of entries as observations in y_vec/X_mat), a
+  vector with integer values from 1 to num_folds. e.g. validation_fold_vec <- sample(rep(1:num_folds, l=nrow(X_mat)))
 - (5 points) initialize a variable called error_mat, a numeric matrix
   (num_folds x max_neighbors).
 - (5 points) There should be a for loop over num_neighbors from 1 to
@@ -118,10 +122,12 @@ algorithm.
 - (5 points) Compute a variable called mean_error_vec (size
   max_neighbors) by taking the mean of each column of error_mat.
 - (5 points) Compute a variable called best_neighbors which is the
-  number of neighbors with minimal error.
-- (5 points) Your function should output (1) the predictions for X_new,
+  number of neighbors with minimal error. This is the number of neighbors you should use to make predictions on X_new.
+- (5 points) Your function should output a list with elements for
+  (1) the predictions for X_new,
   using the entire X_mat,y_vec with best_neighbors; (2) the
-  mean_error_mat for visualizing the validation error.
+  mean_error_vec for visualizing the mean validation error; 
+  (3) anything else that may be relevant, e.g. the error_mat values for plotting the validation error for each fold.
 
 *** Experiments/application
 - Use spam data set from
@@ -130,10 +136,8 @@ algorithm.
   1). You can do this by subtracting away the mean and then dividing
   by the standard deviation of each column (or just use a standard
   function like scale in R).
-- (10 points) Use NearestNeighborsCV on the whole data set, then plot
-  validation error as a function of the number of neighbors,
-  separately for each fold.
-- (10 points) Draw a bold line for the mean validation error, and draw
+- (10 points) Use NearestNeighborsCV with the whole data set as the training inputs (X_mat/y_vec). The point is to plot the validation error, so it doesn't matter what you use for X_new (use 0 or 1 observation for speed).
+- (10 points) Plot a bold line for the mean validation error, and draw
   a point to emphasize the minimum.
 - (10 points) Randomly create a variable test_fold_vec which is a
   vector with one element for each observation, and elements are
@@ -148,7 +152,6 @@ algorithm.
   models. Example:
 
 [[file:2-test-accuracy.png]]
-
 
 *** Grading rubric (out of 120 points)
 
@@ -167,8 +170,25 @@ Extra credit:
 - 10 points if your github repo includes a README.org (or README.md
   etc) file with a link to the source code of your GradientDescent
   function, and an explanation about how to run it on the data sets.
+- 10 points if in your plot of validation error versus number of
+  neighbors, you include a separate line for each fold (in addition to
+  the bold mean line requested above).
 - 10 points if you run your GradientDescent function through KFoldCV
   as well, and show results for that as another algorithm in your test
   error figure.
+- 10 points if you compute and plot ROC curves for each (test fold,
+  algorithm) combination. Make sure each algorithm is drawn in a
+  different color, and there is a legend that the reader can use to
+  read the figure. Example:
+
+[[file:1-ROC.PNG]]
   
+- 10 points if you compute area under the ROC curve (AUC) and include
+  that as another evaluation metric (in a separate panel/plot) to
+  compare the test accuracy of the algorithms.
   
+** FAQ
+
+- how to debug R code? you should use traceback() to find out where the error is happening, the put print statements or browser() on the line just before the error, so you can see what is going on and debug.
+- Given only 2 data points (or any even number), how do you make sure the algorithm functions properly?  For example, with 2 nearest neighbors, if one neighbor is 0 and the other is 1, how do we predict the current value? Given an even number of neighbors in binary classification, there is a possibility of a tie. In that case there are various rules for breaking the ties (e.g. select one of the classes at random, select the most frequent class in the train data) and hopefully it doesn't matter which rule you use. One of them should be implemented in whatever library function you are using (e.g. class::knn in R uses the random selection).
+- for making data tables to visualize using ggplot2 you may want to use [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch17-appendix.html#list-of-data-tables][the list of data tables idiom]].

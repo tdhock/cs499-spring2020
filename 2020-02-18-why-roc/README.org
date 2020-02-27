@@ -1,0 +1,38 @@
+Why do ROC curve analysis?
+
+Why not just use test error/accuracy?
+
+Here is an example, for three algorithms on a problem related to
+classifying presence/absence of Sugar Maple trees at various
+geographic locations.
+- glmnet: L1-regularized linear model.
+- major.class: trivial baseline which always predicts the most
+  frequent class in the train set.
+- xgboost: shallow nonlinear learner (boosted decision trees).
+
+[[file:figure-batchtools-expired-earth-metrics-default-Sugar-Maple.png]]
+
+Which algorithm should we use for prediction?
+
+Interactive ROC curve data visualizations:
+
+- [[http://bl.ocks.org/tdhock/raw/eab2a3e0050fa972d99a61c037cf2d7d/][two panels smooth transitions]].
+
+- [[http://bl.ocks.org/tdhock/raw/c76f05789df48400a7628085470c4823/][three panels smooth transitions]] functions of threshold.
+
+- [[http://bl.ocks.org/tdhock/raw/172d0f68a51a8de5d6f1bed7f23f5f82/][roc + class balance errors + error metric comparison]].
+
+- [[http://bl.ocks.org/tdhock/raw/a70c21c27665f14d4591c1fe9b2b730f/][All four linked plots]].
+
+- [[http://bl.ocks.org/tdhock/raw/40ce744fe6f8200a3847d58c5d939e35/][Original data viz]] shows that this is only an issue with
+  weight.name=balanced (weights/loss which are not the same for each
+  observation, i.e. bigger weights are used for the positive class, so
+  that the total weight is the same for both classes). The xgboost
+  model with weight.name=one does have better accuracy than glmnet
+  (weights/loss which are the same=1 for each observation).
+
+- [[http://bl.ocks.org/tdhock/raw/dd83af54b5efd7590da5715aa3b46f39/][Viz for the other species (Table Mountain Pine)]] shows that even
+  though accuracy is the same for each algorithm, AUC is best for
+  glmnet. Also highlights the importance of looking at multiple test
+  sets (not just one), to see if there is any SIGNIFICANT difference
+  between algorithms.
