@@ -20,6 +20,8 @@ al., which is freely available online.
   using ggplot2/animint2]].
 - Feb 11: [[http://members.cbio.mines-paristech.fr/~thocking/animint2-manual/Ch10-nearest-neighbors.html][Nearest Neighbors interactive data viz]].
 - Feb 13: [[file:projects/2.R][project 2 coding demo]], [[file:projects/1.R][project 1 suggestions]].
+- Feb 18: ROC curve examples: [[http://bl.ocks.org/tdhock/raw/dd83af54b5efd7590da5715aa3b46f39/][classifiers that always predict zero by
+  default]], [[http://bl.ocks.org/tdhock/raw/40ce744fe6f8200a3847d58c5d939e35/][classifiers with very different FPR at default threshold]].
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
