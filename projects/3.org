@@ -3,6 +3,10 @@ Coding project 3: neural network for binary classification.
 For this project you will be implementing a stochastic gradient
 descent algorithm for a neural network with one hidden layer.
 
+For this project it is strongly encouraged to use R packages
+data.table and ggplot2 for data reading and visualization,
+[[file:3.R][See example/demo R script]].
+
 ** Algorithm: stochastic gradient descent with early stopping regularization
 Function name: NNetOneSplit
 - (10 points) Inputs should be: 
