@@ -6,9 +6,24 @@ X.mat <- as.matrix(spam.dt[, -label.col.i, with=FALSE])
 yt.vec <- ifelse(spam.dt[[label.col.i]]==1, 1, -1)
 X.sc <- scale(X.mat)
 
-## Define number of hidden units.
-architecture <- c(ncol(X.sc), 50, 20, 1)
+n.folds <- 5
+set.seed(1)
+fold.vec <- sample(rep(1:n.folds, l=length(yt.vec)))
 
+validation.fold <- 1
+is.validation <- fold.vec == validation.fold
+is.train <- !is.validation
+table(is.train)
+
+## also extreme inefficient, avoid!!
+for(f in fold.vec){
+  if(f==validation.fold){
+    validation.data <- c(validation.data, new.data)
+  }
+}
+
+## Define number of hidden units.
+architecture <- c(ncol(X.sc), 20, 1)
 ## Initialization of weights to random numbers close to zero.
 set.seed(1)
 weight.mat.list <- list()
@@ -31,44 +46,89 @@ for(layer.i in seq_along(weight.mat.list)){
     input=as.integer(col(w.mat)))
 }
 weight.dt <- do.call(rbind, weight.dt.list)
-
 ggplot()+
   theme_bw()+
   theme(panel.spacing=grid::unit(0, "lines"))+
   facet_grid(. ~ layer.i, labeller=label_both)+
   geom_tile(aes(
-    input, output, fill=weight),
+    x=input, y=output, fill=weight),
     data=weight.dt)+
-  scale_fill_gradient2()
+  scale_fill_gradient2()+
+  coord_equal()
+
+ForwardProp <- function(input.mat, w.list){
+  h.list <- list(input.mat)
+  for(layer.i in 1:length(w.list)){
+    right.side <- h.list[[layer.i]]
+    left.side <- w.list[[layer.i]]
+    a.vec <- left.side %*% right.side
+    h.list[[layer.i+1]] <- if(layer.i==length(w.list)){
+      a.vec #last layer activation is identity.
+    }else{
+      1/(1+exp(-a.vec))
+    }
+  }
+  h.list
+}
+
+epoch <- 0
+yt.train <- yt.vec[is.train]
+X.train <- X.sc[is.train,]
+loss.dt.list <- list()
 
 ## Pick one observation (SGD)
-obs.i <- 1
-x <- X.sc[obs.i,]
-yt <- yt.vec[obs.i]
-
-## Forward propagation.
-h.list <- list(as.numeric(x))
-for(layer.i in 1:length(weight.mat.list)){
-  a.vec <- weight.mat.list[[layer.i]] %*% h.list[[layer.i]]
-  h.list[[layer.i+1]] <- if(layer.i==length(weight.mat.list)){
-    a.vec #last layer activation is identity.
-  }else{
-    1/(1+exp(-a.vec))
+epoch <- epoch+1
+obs.vec <- sample(seq_along(yt.train))
+for(iteration.i in seq_along(obs.vec)){#one pass through the train observations.
+  obs.i <- obs.vec[[iteration.i]]
+  ##cat(sprintf("%4d / %4d %d\n", iteration.i, length(obs.vec), obs.i))
+  x <- X.train[obs.i,]
+  yt <- yt.train[obs.i]
+  ## Forward propagation.
+  h.list <- ForwardProp(x, weight.mat.list)
+  ##str(h.list)
+  ## Back propagation.
+  grad.w.list <- list()
+  for(layer.i in length(weight.mat.list):1){
+    grad.a <- if(layer.i==length(weight.mat.list)){
+      -yt / (1+exp(yt*h.list[[length(h.list)]]))
+    }else{
+      grad.h <- t(weight.mat.list[[layer.i+1]]) %*% grad.a
+      h.vec <- h.list[[layer.i+1]]
+      grad.h * h.vec * (1-h.vec)
+    }
+    grad.w.list[[layer.i]] <- grad.a %*% t(h.list[[layer.i]])
   }
-}
-str(h.list)
-
-## Back propagation.
-grad.w.list <- list()
-for(layer.i in length(weight.mat.list):1){
-  grad.a <- if(layer.i==length(weight.mat.list)){
-    -yt / (1+exp(yt*h.list[[length(h.list)]]))
-  }else{
-    grad.h <- t(weight.mat.list[[layer.i+1]]) %*% grad.a
-    h.vec <- h.list[[layer.i+1]]
-    grad.h * h.vec * (1-h.vec)
+  ##str(grad.w.list)
+  ## Take a step in the negative gradient direction.
+  step.size <- 0.05
+  for(layer.i in seq_along(weight.mat.list)){
+    weight.mat.list[[layer.i]] <-
+      weight.mat.list[[layer.i]] - step.size * grad.w.list[[layer.i]]
   }
-  grad.w.list[[layer.i]] <- grad.a %*% t(h.list[[layer.i]])
+  ##end of iteration.
+}##end of epoch.
+pred.h.list <- ForwardProp(t(X.sc), weight.mat.list)
+pred.vec <- as.numeric(pred.h.list[[length(pred.h.list)]])
+LogisticLoss <- function(pred, label){
+  log(1+exp(-label*pred))
 }
-str(grad.w.list)
+loss.vec <- LogisticLoss(pred.vec, yt.vec)
+loss.dt.list[[epoch]] <- data.table(
+  epoch,
+  loss=loss.vec,
+  set=ifelse(is.train, "train", "validation")
+)[, .(
+  mean.loss=mean(loss)
+), by=.(epoch, set)]
 
+## Please avoid this idiom for accumulating data tables (inefficient
+## quadratic time/space complexity).
+loss.dt <- rbind(loss.dt, new.dt)
+
+## Do this instead (linear time/space).
+loss.dt <- do.call(rbind, loss.dt.list)
+ggplot()+
+  geom_line(aes(
+    x=epoch, y=mean.loss, color=set),
+    data=loss.dt)
