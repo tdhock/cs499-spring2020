@@ -39,7 +39,8 @@ ggplot()+
   geom_tile(aes(
     input, output, fill=weight),
     data=weight.dt)+
-  scale_fill_gradient2()
+  scale_fill_gradient2()+
+  coord_equal()
 
 ## Pick one observation (SGD)
 obs.i <- 1

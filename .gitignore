@@ -1,3 +1,6 @@
+*.csv
+*.data
+*.gz
 roster.xlsx
 *.html
 *~
