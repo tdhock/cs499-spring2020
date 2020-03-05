@@ -22,6 +22,9 @@ al., which is freely available online.
 - Feb 13: [[file:projects/2.R][project 2 coding demo]], [[file:projects/1.R][project 1 suggestions]].
 - Feb 18: [[file:2020-02-18-why-roc/README.org][ROC curve data visualizations]].
 - Feb 27: [[file:projects/3.R][project 3 coding demo]].
+- Mar 5: [[file:spring_2020_practice_mid_term_exam.pdf][practice mid-term]] TODO over the weekend.
+- Mar 10: review/solutions of practice mid-term.
+- Mar 12: mid-term exam.
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
