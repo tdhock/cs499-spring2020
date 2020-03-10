@@ -13,6 +13,10 @@ Syllabus: [[file:CS499-Spring2020-Deep-Learning-Syllabus.pdf][PDF]].
 The required readings will be from [[https://www.deeplearningbook.org/][Deep Learning]] by Goodfellow, et
 al., which is freely available online.
 
+** Screencasts
+
+To learn basic R programming skills which will be highly relevant to your coding projects in this class, please watch [[https://www.youtube.com/playlist?list=PLwc48KSH3D1M78ilQi35KPe2GHa7B_Rme][these screencasts]] and follow along (pause the videos, type the code, then and execute the code on your own computer).
+
 ** Lectures
 
 - Jan 14: [[file:2020-01-14-applications/slides.pdf]]
