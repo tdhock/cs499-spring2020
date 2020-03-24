@@ -1,7 +1,9 @@
-Coding project 3: neural network for binary classification.
+Coding project 3: neural network for binary classification (from scratch)
 
 For this project you will be implementing a stochastic gradient
-descent algorithm for a neural network with one hidden layer.
+descent algorithm for a neural network with one hidden layer. The goal
+of this project is to implement the backpropagation algorithm from
+scratch so you learn how it works.
 
 For this project it is strongly encouraged to use R packages
 data.table and ggplot2 for data reading and visualization,

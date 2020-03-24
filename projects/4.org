@@ -1,0 +1,93 @@
+Coding project 4: neural network for binary classification (TensorFlow/keras)
+
+For this project you will be implementing a stochastic gradient
+descent algorithm for a neural network with one hidden layer. Whereas
+the goal of the previous project was implementing the model from
+scratch, the goal of this project is to learn how to use a high-level
+library for neural network specification and training.
+
+For this project you need to use TensorFlow/keras via
+either the Python or R interface:
+- Python interface documentation: [[https://www.tensorflow.org/tutorials/keras/classification][classification tutorial]], [[https://keras.io/activations/][activation
+  functions]], [[https://www.tensorflow.org/tutorials/keras/overfit_and_underfit][overfit and underfit]]
+- R interface documentation: [[https://tensorflow.rstudio.com/tutorials/beginners/][classification tutorial]], [[https://keras.rstudio.com/reference/fit.html][model fit function]]
+
+NOTES:
+- The "logistic loss" that we have discussed in class is the same
+  as the "BinaryCrossentropy" loss in keras.
+- The "step size" parameter that we have discussed in class is the
+  same as the "learning rate" in keras.
+
+** Experiments/application
+
+- (10 points) Load the spam data set from
+  [[https://web.stanford.edu/~hastie/ElemStatLearn/data.html]]
+- (10 points) Scale the input matrix, same as in previous projects. Or
+  as described here
+  https://www.tensorflow.org/tutorials/load_data/csv#data_normalization
+- (10 points) Divide the data into 80% train, 20% test
+  observations (out of all observations in the whole data set).
+- (10 points) Next divide the train data into 60% subtrain, 40%
+  validation. e.g. as described here
+  https://www.tensorflow.org/tutorials/keras/overfit_and_underfit#the_higgs_dataset
+- (10 points) Define three different neural networks, each with one
+  hidden layer, but with different numbers of hidden units (10, 100,
+  1000). In keras each is a sequential model with one dense layer.
+- (20 points) On the same plot, show the logistic loss as a function
+  of the number of epochs (use a different color for each number of
+  hidden units, e.g. light blue=10, dark blue=100, black=1000, and use
+  a different linetype for each set, e.g. subtrain=solid,
+  validation=dashed). Draw a point to emphasize the minimum of each
+  validation loss curve.
+- (10 points) For each of the three networks, define a variable called
+  best_epochs which is the number of epochs which minimizes the
+  validation loss. 
+- (10 points) Re-train each network using the corresponding value of
+  best_epochs (which should be different for each network).
+- (10 points) Finally use the learned models to make predictions
+  on the test set. What is the prediction accuracy? (percent correctly
+  predicted labels in the test set) What is the prediction accuracy of
+  the baseline model which predicts the most frequent class in the
+  train labels? 
+
+*** Grading rubric 
+
+Your final grade for this project will be computed by multiplying the
+percentage from your [[file:group-evals.org][group evaluations]] with your group's total score
+from the rubric above.
+
+Your group should submit a PDF on BBLearn. 
+- The first thing in the PDF should be your names and student ID's
+  (e.g. th798) and a link to your source code in a public repo
+  (e.g. github, there should be no code in your PDF report).
+- The second thing in the PDF should be your group evaluation scores
+  for yourself and your teammates.
+
+Extra credit: 
+- 10 points if your github repo includes a README.org (or README.md
+  etc) file with a link to the source code of your script, and an
+  explanation about how to install the necessary libraries, and run it
+  on the data set.
+- 10 points if you do 4-fold cross-validation instead of the single
+  train/test split described above, and you make a plot of test
+  accuracy for all models for each split/fold.
+- 10 points if you show GradientDescent (from project 1, logistic
+  regression with number of iterations selected by a held-out
+  validation set) in your test accuracy result figure.
+- 10 points if you show NearestNeighborsCV (from project 2) in your
+  test accuracy figure.
+- 10 points if you show NNOneSplit (from project 3) in your
+  test accuracy figure.
+- 10 points if you compute and plot ROC curves for each (test fold,
+  algorithm) combination. Make sure each algorithm is drawn in a
+  different color, and there is a legend that the reader can use to
+  read the figure. Example:
+
+[[file:1-ROC.PNG]]
+  
+- 10 points if you compute area under the ROC curve (AUC) and include
+  that as another evaluation metric (in a separate panel/plot) to
+  compare the test accuracy of the algorithms.
+  
+** FAQ
+
