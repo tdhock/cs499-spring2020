@@ -42,8 +42,9 @@ NOTES:
 - (10 points) For each of the three networks, define a variable called
   best_epochs which is the number of epochs which minimizes the
   validation loss. 
-- (10 points) Re-train each network using the corresponding value of
-  best_epochs (which should be different for each network).
+- (10 points) Re-train each network on the entire train set (not just
+  the subtrain set), using the corresponding value of best_epochs
+  (which should be different for each network).
 - (10 points) Finally use the learned models to make predictions
   on the test set. What is the prediction accuracy? (percent correctly
   predicted labels in the test set) What is the prediction accuracy of
