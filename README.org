@@ -39,7 +39,7 @@ To learn basic R programming skills which will be highly relevant to your coding
   re-consider, by Fri Feb 14 @ 11:59PM)
 - [[file:projects/2.org][2: K-fold cross-validation]], due Fri Feb 21 @ 11:59PM.
 - [[file:projects/3.org][3: stochastic gradient descent for neural network with one hidden layer]], due Fri Mar 6 @ 11:59PM.
-- 4, due Fri Apr 3 @ 11:59PM.
+- [[file:projects/4.org][4: tensorflow/keras for neural networks with one hidden layer]], due Fri Apr 3 @ 11:59PM.
 - 5, due Fri Apr 17 @ 11:59PM.
 - 6, due Fri May 1 @ 11:59PM.
 
