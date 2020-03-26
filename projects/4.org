@@ -9,8 +9,9 @@ library for neural network specification and training.
 For this project you need to use TensorFlow/keras via
 either the Python or R interface:
 - Python interface documentation: [[https://www.tensorflow.org/tutorials/keras/classification][classification tutorial]], [[https://keras.io/activations/][activation
-  functions]], [[https://www.tensorflow.org/tutorials/keras/overfit_and_underfit][overfit and underfit]]
-- R interface documentation: [[https://tensorflow.rstudio.com/tutorials/beginners/][classification tutorial]], [[https://keras.rstudio.com/reference/fit.html][model fit function]]
+  functions]], [[https://www.tensorflow.org/tutorials/keras/overfit_and_underfit][overfit and underfit]], [[https://keras.io/losses/][loss functions]], [[https://keras.io/metrics/][metrics]]
+- R interface documentation: [[https://tensorflow.rstudio.com/tutorials/beginners/][classification tutorial]], functions:
+  [[https://keras.rstudio.com/reference/compile.html][compile]], [[https://keras.rstudio.com/reference/fit.html][fit]], [[https://tensorflow.rstudio.com/reference/tensorflow/use_session_with_seed/][use_session_with_seed]], [[https://www.youtube.com/playlist?list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK][SCREENCASTS]]
 
 NOTES:
 - The "logistic loss" that we have discussed in class is the same

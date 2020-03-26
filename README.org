@@ -29,6 +29,11 @@ To learn basic R programming skills which will be highly relevant to your coding
 - Mar 5: [[file:spring_2020_practice_mid_term_exam.pdf][practice mid-term]] TODO over the weekend.
 - Mar 10: review/solutions of practice mid-term.
 - Mar 12: mid-term exam.
+- Mar 26: R keras screencasts:
+  - [[https://www.youtube.com/watch?v=97hEAcMndgs&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=2&t=0s][Installation]]
+  - [[https://www.youtube.com/watch?v=s9ZS1JAdmuc&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=3&t=3s][MNIST tutorial]]
+  - [[https://www.youtube.com/watch?v=yZh2VNmdVaU&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=3][Convert spam data to arrays]]
+  - [[https://www.youtube.com/watch?v=57POnU9kvig&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=4][Training a neural network for spam data]]
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
