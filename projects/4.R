@@ -1,5 +1,12 @@
 library(keras)
+## from https://github.com/rstudio/keras/issues/937
+if(FALSE){
+  keras::install_keras(version = "2.1.6", tensorflow = "1.5")
+}
+keras::use_implementation("keras")
+keras::use_backend("tensorflow")
 
+## keras tutorial.
 mnist <- dataset_mnist()
 mnist$train$x <- mnist$train$x/255
 mnist$test$x <- mnist$test$x/255
@@ -60,12 +67,11 @@ y.train <- y[is.train]
 y.test <- y[is.test]
 
 
-n.splits <- 10
+n.splits <- 2
 split.metrics.list <- list()
 for(split.i in 1:n.splits){
   model <- keras_model_sequential() %>%
-    layer_flatten(input_shape = ncol(X.train.mat)) %>% #input layer
-    layer_dense(units = 100, activation = "sigmoid", use_bias=FALSE) %>% #hidden layer
+    layer_dense(input_shape=ncol(X.train.mat), units = 100, activation = "sigmoid", use_bias=FALSE) %>% #hidden layer
     layer_dense(1, activation = "sigmoid", use_bias=FALSE) #output layer
   model %>%
     compile(

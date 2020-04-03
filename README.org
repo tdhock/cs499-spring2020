@@ -34,6 +34,7 @@ To learn basic R programming skills which will be highly relevant to your coding
   - [[https://www.youtube.com/watch?v=s9ZS1JAdmuc&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=3&t=3s][MNIST tutorial]]
   - [[https://www.youtube.com/watch?v=yZh2VNmdVaU&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=3][Convert spam data to arrays]]
   - [[https://www.youtube.com/watch?v=57POnU9kvig&list=PLwc48KSH3D1PYdSd_27USy-WFAHJIfQTK&index=4][Training a neural network for spam data]]
+- Apr 2: [[https://www.youtube.com/playlist?list%3DPLwc48KSH3D1MvTf_JOI00_eIPcoeYMM_o][R keras screencasts analyzing number of hidden units]]
 - TODO: [[file:2019-04-04-neural-network-classification/README.org][Data visualizations of neural network training/validation error curves]].
 
 ** Coding projects
@@ -45,7 +46,7 @@ To learn basic R programming skills which will be highly relevant to your coding
 - [[file:projects/2.org][2: K-fold cross-validation]], due Fri Feb 21 @ 11:59PM.
 - [[file:projects/3.org][3: stochastic gradient descent for neural network with one hidden layer]], due Fri Mar 6 @ 11:59PM.
 - [[file:projects/4.org][4: tensorflow/keras for neural networks with one hidden layer]], due Fri Apr 3 @ 11:59PM.
-- 5, due Fri Apr 17 @ 11:59PM.
+- [[file:projects/5.org][5: tensorflow/keras for demonstrating regularization parameters of neural networks]], due Fri Apr 17 @ 11:59PM.
 - 6, due Fri May 1 @ 11:59PM.
 
 ** How to ace this class
