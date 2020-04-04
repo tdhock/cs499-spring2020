@@ -39,14 +39,12 @@ y.subtrain <- y.train[is.subtrain]
 y.validation <- y.train[is.validation]
 
 ## analysis of number of hidden units.
-
-units.metrics.list <- list()
-
+units.metrics.list <- if(file.exists("5-units.rds")){
+  readRDS("5-units.rds")
+}else list()
 (hidden.units.vec <- 2^seq(1, 10))
 hidden.units.new <- hidden.units.vec[
   ! hidden.units.vec %in% names(units.metrics.list)]
-
-##for(hidden.units.i in seq_along(hidden.units.new)){
 units.metrics.list.new <- future.apply::future_lapply(
   hidden.units.new, function(hidden.units){
     print(hidden.units)
@@ -78,7 +76,7 @@ units.metrics.list.new <- future.apply::future_lapply(
     data.table::data.table(hidden.units, metrics.wide)
   })
 units.metrics.list[paste(hidden.units.new)] <- units.metrics.list.new
-
+saveRDS(units.metrics.list, "5-units.rds")
 units.metrics <- do.call(rbind, units.metrics.list)
 
 library(ggplot2)
