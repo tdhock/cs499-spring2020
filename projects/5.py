@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import plotnine as p9 #conda install -c conda-forge plotnine
 import pandas as pd
-from metrics import ExactAUC, testN, testConst
+from metrics import ExactAUC
 
 spam = np.genfromtxt("spam.data", delimiter=" ")
 X_unscaled = spam[:,:-1]
@@ -34,7 +34,7 @@ model = tf.keras.Model(inputs=inputs, outputs=outputs, name="spam_model")
 model.compile(
     optimizer=tf.keras.optimizers.Adam(),
     loss=tf.keras.losses.binary_crossentropy,
-    metrics=["accuracy", ExactAUC, testN, testConst])
+    metrics=["accuracy", ExactAUC])
 
 n_epochs = 100
 history = model.fit(
