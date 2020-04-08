@@ -1,1 +1,112 @@
+Coding project 5: demonstrating regularization/overfitting 
+
+In previous projects we have mainly used the number of
+iterations/epochs of gradient descent as the regularization
+parameter. In this project the goal is to demonstrate other techniques
+for regularizing neural networks.
+
 Example code: [[file:5.R]]
+
+For this project you need to use TensorFlow/keras via
+either the Python or R interface:
+- Python interface documentation: [[https://www.tensorflow.org/tutorials/keras/classification][classification tutorial]], [[https://keras.io/activations/][activation
+  functions]], [[https://www.tensorflow.org/tutorials/keras/overfit_and_underfit][overfit and underfit]], [[https://keras.io/losses/][loss functions]], [[https://keras.io/metrics/][metrics]]
+- R interface documentation: [[https://tensorflow.rstudio.com/tutorials/beginners/][classification tutorial]], functions:
+  [[https://keras.rstudio.com/reference/compile.html][compile]], [[https://keras.rstudio.com/reference/fit.html][fit]], [[https://tensorflow.rstudio.com/reference/tensorflow/use_session_with_seed/][use_session_with_seed]]
+- [[https://www.youtube.com/playlist?list=PLwc48KSH3D1MvTf_JOI00_eIPcoeYMM_o][SCREENCASTS explaining how to investigate the number of hidden
+  units as a regularization parameter]]
+
+NOTES:
+- The "logistic loss" that we have discussed in class is the same
+  as the "BinaryCrossentropy" loss in keras.
+- The "step size" parameter that we have discussed in class is the
+  same as the "learning rate" in keras.
+
+** Experiments/application
+
+The goal is to do a computational experiment on the spam data set that
+demonstrates a parameter that can be tuned to regularize a neural
+network. The experiment should result in a plot of train/validation
+loss (on the y axis) as a function of a regularization parameter (on
+the x axis). It is your choice about which regularization parameter to
+investigate, and you can get extra credit if you investigate a
+regularization parameter that is described in the book, but we have
+not discussed in class/screencasts. You may NOT choose to plot the
+regularizing effect of early stopping (x axis = number of
+iterations/epochs), because we have already done that in previous
+projects. Here is a list of parameters mentioned in Chapter 7 that you
+could investigate for extra credit:
+- 7.1 Parameter norm penalties, X axis = degree of L2 / weight
+  decay. 10 points extra credit.
+- 7.5 noise robustness, X axis = degree of noise/perturbation. 10
+  points extra credit.
+- 7.12 dropout, X axis = probability of dropout. 10 points extra
+  credit.
+And here are the two regularization parameters that I demonstrated in
+the screencasts linked above, and you can do something similar for
+your project, for normal (not extra) credit:
+- X axis = number of hidden units in a network with one hidden layer.
+- X axis = number of hidden layers of a given size.
+
+The rubric is
+
+- (10 points) Load the spam data set from
+  [[https://web.stanford.edu/~hastie/ElemStatLearn/data.html]]
+- (10 points) Scale the input matrix, same as in previous projects. Or
+  as described here
+  https://www.tensorflow.org/tutorials/load_data/csv#data_normalization
+- (10 points) Divide the data into 80% train, 20% test
+  observations (out of all observations in the whole data set).
+- (10 points) Next divide the train data into 50% subtrain, 50%
+  validation. e.g. as described here
+  https://www.tensorflow.org/tutorials/keras/overfit_and_underfit#the_higgs_dataset
+- (10 points) Define a for loop over regularization parameter values,
+  and fit a neural network for each.
+- (20 points) On the same plot, show the logistic loss as a function
+  of the regularization parameter (use a different color for each set,
+  e.g. subtrain=solid, validation=dashed). Draw a point to emphasize
+  the minimum of each validation loss curve. As the strength of
+  regularization decreases, the train loss should always decrease,
+  whereas the validation loss should decrease up to a certain point,
+  and then start increasing (overfitting).
+- (10 points) Define a variable called best_parameter_value which is
+  the regularization parameter value which minimizes the validation
+  loss.
+- (10 points) Re-train the network on the entire train set (not just
+  the subtrain set), using the corresponding value of
+  best_parameter_value.
+- (10 points) Finally use the learned model to make predictions on the
+  test set. What is the prediction accuracy? (percent correctly
+  predicted labels in the test set) What is the prediction accuracy of
+  the baseline model which predicts the most frequent class in the
+  train labels?
+
+Your final grade for this project will be computed by multiplying the
+percentage from your [[file:group-evals.org][group evaluations]] with your group's total score
+from the rubric above.
+
+Your group should submit a PDF on BBLearn. 
+- The first thing in the PDF should be your names and student ID's
+  (e.g. th798) and a link to your source code in a public repo
+  (e.g. github, there should be no code in your PDF report).
+- The second thing in the PDF should be your group evaluation scores
+  for yourself and your teammates.
+
+Extra credit: 
+- 10 points if your github repo includes a README.org (or README.md
+  etc) file with a link to the source code of your script, and an
+  explanation about how to install the necessary libraries, and run it
+  on the data set.
+- 10 points if you do 4-fold cross-validation instead of the single
+  train/test split described above, and you make a plot of test
+  accuracy for all models for each split/fold.
+- 10 points if you compute and plot ROC curves for each (test fold,
+  algorithm) combination. Make sure each algorithm is drawn in a
+  different color, and there is a legend that the reader can use to
+  read the figure. Example:
+
+[[file:1-ROC.PNG]]
+  
+- 10 points if you compute area under the ROC curve (AUC) and include
+  that as another evaluation metric (in a separate panel/plot) to
+  compare the test accuracy of the algorithms.
