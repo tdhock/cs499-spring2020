@@ -1,0 +1,1 @@
+- [[https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn/][mnist_cnn keras R example]]
