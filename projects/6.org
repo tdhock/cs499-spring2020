@@ -1,1 +1,2 @@
+- [[file:6.R][my example code]]
 - [[https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn/][mnist_cnn keras R example]]
