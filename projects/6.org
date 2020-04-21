@@ -1,2 +1,102 @@
-- [[file:6.R][my example code]]
+Coding project 6: convolutional versus fully connected networks
+
+In previous projects we have used fully connected neural networks. In
+this project the goal is to additionally fit a convolutional neural
+network, and compare the prediction accuracy of the two
+architectures.
+
+- [[file:6.R][my example code]] for this project (based on the screencasts, feel
+  free to adapt the ideas in my code for your own projects).
 - [[https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn/][mnist_cnn keras R example]]
+
+For this project you need to use TensorFlow/keras via
+either the Python or R interface:
+- Python interface documentation: [[https://www.tensorflow.org/tutorials/keras/classification][classification tutorial]], [[https://keras.io/activations/][activation
+  functions]], [[https://www.tensorflow.org/tutorials/keras/overfit_and_underfit][overfit and underfit]], [[https://keras.io/losses/][loss functions]], [[https://keras.io/metrics/][metrics]]
+- R interface documentation: [[https://tensorflow.rstudio.com/tutorials/beginners/][classification tutorial]], functions:
+  [[https://keras.rstudio.com/reference/compile.html][compile]], [[https://keras.rstudio.com/reference/fit.html][fit]], [[https://tensorflow.rstudio.com/reference/tensorflow/use_session_with_seed/][use_session_with_seed]]
+- [[https://www.youtube.com/playlist?list=PLwc48KSH3D1O1iWRXid7CsiXI9gO9lS4V][SCREENCASTS explaining how to implement convolutional neural
+  networks using keras in R]].
+
+** Experiments/application
+
+The goal is to do a computational experiment on the zip.train data set
+that compares two neural network architectures in terms of prediction
+accuracy. This is a project which tests your ability to use K-fold
+cross-validation for model evaluation, which means for each fold:
+- splitting full data into train/test for model evaluation.
+- splitting train data into subtrain/validation for selecting a good
+  regularization hyper-parameter value.
+- comparing trained models in terms of prediction error on the test
+  data.
+
+The experiment should result in a plot of test accuracy (proportion of
+correctly predicted labels) versus model. There should be three models: 
+- baseline: always predict the most frequent label in the train data.
+- convolutional: same model architecture as in the [[https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn/][mnist_cnn keras R
+  example]], but with the input_shape changed to reflect the size of the
+  zip.train images (16x16). There should be 315,146 total parameters
+  to learn. The number of hidden units in each layer is
+  (784,6272,9216,128,10).
+- dense: fully connected (784,270,270,128,10) network. The size of
+  this network is deliberately chosen to have a similar number of
+  parameters to learn: 321,098 (note that there are fewer hidden units
+  for the same number of parameters).
+
+The rubric is
+
+- (10 points) Load the zip.train data file from
+  [[https://web.stanford.edu/~hastie/ElemStatLearn/data.html]] -- we will
+  be splitting this data set into train/test so please ignore the
+  zip.test data set (which is a different file). For this data set no
+  need to scale the inputs, because they are already in [-1,1].
+- (10 points) For 5-fold cross-validation, create a variable fold_vec
+  which randomly assigns each observation to a fold from 1 to 5.
+- (10 points) For each fold ID, you should create variables x_train,
+  y_train, x_test, y_test based on fold_vec.
+- (10 points) Use x_train/y_train to fit the two neural network models
+  described above. Use at least 20 epochs with validation_split=0.2
+  (which splits the train data into 20% validation, 80% subtrain).
+- (10 points) Compute validation loss for each number of epochs, and
+  define a variable best_epochs which is the number of epochs that
+  results in minimal validation loss.
+- (10 points) Re-fit the model on the entire train set using
+  best_epochs and validation_split=0.
+- (10 points) Finally use evaluate to compute the accuracy of the
+  learned model on the test set. (proportion correctly predicted
+  labels in the test set)
+- (10 points) Also compute the accuracy of the baseline model, which
+  always predicts the most frequent class label in the train data.
+- (10 points) At the end of your for loop over fold IDs, you should
+  store the accuracy values, model names, and fold IDs in a data
+  structure (e.g. list of data tables) for analysis/plotting.
+- (10 points) Finally, make a dotplot that shows all 15 test accuracy
+  values. The Y axis should show the different models, and the X axis
+  should show the test accuracy values. There should be three rows/y
+  axis ticks (one for each model), and each model have five dots (one
+  for each test fold ID). Make a comment in your report on your
+  interpretation of the figure. Are the neural networks better than
+  baseline? Which of the two neural networks is more accurate?
+
+Your final grade for this project will be computed by multiplying the
+percentage from your [[file:group-evals.org][group evaluations]] with your group's total score
+from the rubric above.
+
+Your group should submit a PDF on BBLearn. 
+- The first thing in the PDF should be your names and student ID's
+  (e.g. th798) and a link to your source code in a public repo
+  (e.g. github, there should be no code in your PDF report).
+- The second thing in the PDF should be your group evaluation scores
+  for yourself and your teammates.
+
+Extra credit: 
+- 10 points if your github repo includes a README.org (or README.md
+  etc) file with a link to the source code of your script, and an
+  explanation about how to install the necessary libraries, and run it
+  on the data set.
+- 10 points if you run a (fully connected 784,6272,9216,128,10)
+  deep neural network model, in addition to the two
+  described above, and include results for that model in your test
+  accuracy figure.
+- 10 points for each additional algorithm from previous coding
+  projects that you include in your final test accuracy figure.

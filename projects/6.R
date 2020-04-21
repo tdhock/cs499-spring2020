@@ -1,3 +1,10 @@
+library(keras)
+## from https://github.com/rstudio/keras/issues/937
+if(FALSE){
+  keras::install_keras(version = "2.1.6", tensorflow = "1.5")
+}
+keras::use_implementation("keras")
+keras::use_backend("tensorflow")
 ## zip.train data
 
 if(!file.exists("zip.train.gz")){
@@ -16,9 +23,45 @@ zip.some <- zip.train[1:10]
 zip.X.array <- array(
   unlist(zip.train[1:nrow(zip.train),-1]),
   c(nrow(zip.train), 16, 16, 1))
-str(zip.y.array)
 zip.class.tab <- table(zip.train$V1)
 zip.y.mat <- keras::to_categorical(zip.train$V1, length(zip.class.tab))
+str(zip.y.mat)
+
+model <- keras_model_sequential() %>%
+  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu',
+                input_shape = dim(zip.X.array)[-1]) %>% 
+  layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
+  layer_dropout(rate = 0.25) %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 128, activation = 'relu') %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = num_classes, activation = 'softmax')
+model %>% compile(
+  loss = loss_categorical_crossentropy,#for multi-class classification
+  optimizer = optimizer_adadelta(),
+  metrics = c('accuracy')
+)
+model %>% fit(
+  zip.X.array, zip.y.mat,
+  batch_size = batch_size,
+  epochs = epochs,
+  validation_split = 0.2
+)
+
+## deep dense model.
+model2 <- keras_model_sequential() %>%
+  layer_flatten(input_shape = input_shape) %>% 
+  layer_dense(units = 270, activation = 'relu') %>% 
+  layer_dense(units = 270, activation = 'relu') %>% 
+  layer_dense(units = 128, activation = 'relu') %>% 
+  layer_dense(units = num_classes, activation = 'softmax')
+model2 %>% compile(
+  loss = loss_categorical_crossentropy,#for multi-class classification
+  optimizer = optimizer_adadelta(),
+  metrics = c('accuracy')
+)
+
 
 zip.some[, observation.i := 1:.N]
 zip.some.tall <- zip.some[, {
@@ -42,13 +85,6 @@ ggplot()+
 
 ## MNIST data 
 
-library(keras)
-## from https://github.com/rstudio/keras/issues/937
-if(FALSE){
-  keras::install_keras(version = "2.1.6", tensorflow = "1.5")
-}
-keras::use_implementation("keras")
-keras::use_backend("tensorflow")
 mnist <- keras::dataset_mnist()
 
 ## https://tensorflow.rstudio.com/guide/keras/examples/mnist_cnn/
@@ -116,7 +152,18 @@ model %>% compile(
   metrics = c('accuracy')
 )
 
-
+## deep dense model.
+model <- keras_model_sequential() %>%
+  layer_flatten(input_shape = input_shape) %>% 
+  layer_dense(units = 700, activation = 'relu') %>% 
+  layer_dense(units = 700, activation = 'relu') %>% 
+  layer_dense(units = 128, activation = 'relu') %>% 
+  layer_dense(units = num_classes, activation = 'softmax')
+model %>% compile(
+  loss = loss_categorical_crossentropy,#for multi-class classification
+  optimizer = optimizer_adadelta(),
+  metrics = c('accuracy')
+)
 
 # Train model
 model %>% fit(
