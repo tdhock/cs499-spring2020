@@ -5,42 +5,42 @@ Exam is WHEN TODO?
    parameters that minimize the logistic loss with respect to
    predictions f(x) and labels y in the train set. 
   - a) we saw that minimizing the logistic loss is equivalent to
-  MINIMIZING or MAXIMIZING the Bernoulli likelihood?
+    MINIMIZING or MAXIMIZING the Bernoulli likelihood?
   - b) we saw that minimizing the logistic loss is equivalent to
-  MINIMIZING or MAXIMIZING the Kullback-Leibler (KL) divergence?
-  - c) For what kinds of machine learning problems would you use a loss
-  function other than the logistic loss? Explain why, in terms of at
-  least one machine learning problem.
+    MINIMIZING or MAXIMIZING the Kullback-Leibler (KL) divergence?
+  - c) For what kinds of machine learning problems would you use a
+    loss function other than the logistic loss? Explain why, in terms
+    of at least one machine learning problem.
 
 2. Cross-validation is an algorithm used throughout machine learning
    in order to quantify the accuracy/error of learned models on unseen
    data.
   - a) In class we discussed two different kinds of cross-validation
-  splits: train/test splits and subtrain/validation splits. What is
-  the purpose of each kind of split?
+    splits: train/test splits and subtrain/validation splits. What is
+    the purpose of each kind of split?
   - b) For a train/test split, give pseudocode for the K-fold
-  cross-validation algorithm, making sure to include inputs/outputs of
-  the algorithm, the random assignment step, and the computation of
-  test accuracy/error.
+    cross-validation algorithm, making sure to include inputs/outputs
+    of the algorithm, the random assignment step, and the computation
+    of test accuracy/error.
 
 3. Interpreting results. Say that we use several train/test splits to
    compare learning algorithms A and B on a particular data set.
-  - a) If algorithm A and B have the same test accuracy, but algorithm B
-  has a larger Area Under the ROC Curve (AUC), then which algorithm
-  should be preferred? Why?
-  - b) If algorithm A has larger test accuracy and AUC than algorithm B,
-  which algorithm should be preferred?
+  - a) If algorithm A and B have the same test accuracy, but algorithm
+    B has a larger Area Under the ROC Curve (AUC), then which
+    algorithm should be preferred? Why?
+  - b) If algorithm A has larger test accuracy and AUC than algorithm
+    B, which algorithm should be preferred?
 
 4. Model parameters and hyper-parameters.
   - a) In a linear model with early stopping regularization, consider
-  two parameters: the weight vector and the number of iterations of
-  gradient descent. Which is a hyper-parameter, and which is the
-  regular model parameter? Why?
+    two parameters: the weight vector and the number of iterations of
+    gradient descent. Which is a hyper-parameter, and which is the
+    regular model parameter? Why?
   - b) In a deep neural network consider four parameters: the
-  layer-specific activation functions, the layer-specific weight
-  matrices, the number of hidden units per layer, and the number of
-  layers. Which are hyper-parameters, and which are regular model
-  parameters? Why?
+    layer-specific activation functions, the layer-specific weight
+    matrices, the number of hidden units per layer, and the number of
+    layers. Which are hyper-parameters, and which are regular model
+    parameters? Why?
 
 5. Number of parameters to learn. Assume a deep neural network with 5
    layers, including the input and output layers. Assume architecture
@@ -51,24 +51,24 @@ Exam is WHEN TODO?
   - b) How many real-valued weight parameters are there in W^2?
   - c) How many real-valued weight parameters are there in W^3?
   - d) How many real-valued weight parameters are there in W^4?
-  - e) How many real-valued weight parameters are there to learn overall
-  in the neural network?
+  - e) How many real-valued weight parameters are there to learn
+    overall in the neural network?
 
 6. Regularization for neural networks. Many hyper-parameters of deep
    neural networks that we saw in class can be interpreted as
    regularization parameters. 
   - a) Give three examples of hyper-parameters which can be interpreted
-  as regularization parameters of deep neural networks. For each
-  parameter, do LARGE or SMALL parameter values result in overfitting?
+    as regularization parameters of deep neural networks. For each
+    parameter, do LARGE or SMALL parameter values result in overfitting?
   - b) Explain how you could demonstrate that a hyper-parameter has a
-  regularizing effect. Explain the computations you would perform and
-  the data visualization/plot that you would create.
+    regularizing effect. Explain the computations you would perform and
+    the data visualization/plot that you would create.
 
 7. Convolutional neural networks. 
   - a) The convolution operation can be interpreted as a SPARSE or DENSE
-  matrix multiplication?
+    matrix multiplication?
   - b) Assume layer A in a neural network is fully connected, and layer
-  B is convolutional. What is the 
+    B is convolutional. What is the 
 
 8. Machine learning in practice. Machine learning as we have studied
    in class relies on a training data set with the same statistical
@@ -77,16 +77,16 @@ Exam is WHEN TODO?
    should (or should not) be expected to provide highly accurate
    predictions.
   - a) predicting what happens in the stock market tomorrow, by training
-  on data from the past 10 years.
+    on data from the past 10 years.
   - b) predicting whether or not an email message should be considered
-  spam, by training on data that you have manually labeled by clicking
-  the spam button in your email client.
+    spam, by training on data that you have manually labeled by clicking
+    the spam button in your email client.
   - c) predicting which of the ten possible digits appears in a
-  bitmap/grayscale image of a single digit.
+    bitmap/grayscale image of a single digit.
   - d) predicting whether or not a person admitted to the local hospital
-  dies from COVID19, by training on data from all COVID19 patients
-  that have been admitted to the same local hospital.
+    dies from COVID19, by training on data from all COVID19 patients
+    that have been admitted to the same local hospital.
   - e) predicting whether or not a person admitted to the local hospital
-  dies from COVID19, by training on data from all COVID19 patients
-  that have been admitted to a different hospital (possibly in a
-  different country).
+    dies from COVID19, by training on data from all COVID19 patients
+    that have been admitted to a different hospital (possibly in a
+    different country).
