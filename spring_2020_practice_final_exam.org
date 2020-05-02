@@ -67,8 +67,9 @@ Exam is WHEN TODO?
 7. Convolutional neural networks. 
   - a) The convolution operation can be interpreted as a SPARSE or DENSE
     matrix multiplication?
-  - b) Assume layer A in a neural network is fully connected, and layer
-    B is convolutional. What is the 
+  - b) Assume layer A in a neural network is fully connected, and
+    layer B is convolutional. If both layers have the same number of
+    hidden units, which has more parameters to learn?
 
 8. Machine learning in practice. Machine learning as we have studied
    in class relies on a training data set with the same statistical
