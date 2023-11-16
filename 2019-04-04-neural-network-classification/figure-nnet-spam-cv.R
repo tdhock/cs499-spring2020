@@ -1,13 +1,13 @@
 library(ggplot2)
 library(data.table)
 library(directlabels)
-future::plan("multiprocess")
+future::plan("multisession")
 
-data(spam, package="ElemStatLearn")
+data(spam, package="kernlab")
 head(spam)
-head(y.vec <- ifelse(spam$spam=="spam", 1, -1))
+head(y.vec <- ifelse(spam$type=="spam", 1, -1))
 table(y.vec)
-head(X.mat <- as.matrix(subset(spam, select=-spam)))
+head(X.mat <- as.matrix(subset(spam, select=-type)))
 
 is.binary <- all(y.vec %in% c(1, -1))
 line.search.factor <- NULL
@@ -65,6 +65,7 @@ OneFold <- function(validation.fold, step.size=1){
     if(FALSE){
       curve(sapply(x, cost.step), 0, 300)
     }
+    cat(sprintf("it=%d step=%f\n", iteration, step.size))
     w <- w - step.size * grad.w
     V <- V - step.size * grad.V
     predict.sc <- function(X.tilde){

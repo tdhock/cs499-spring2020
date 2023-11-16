@@ -1,9 +1,9 @@
-data(spam, package="ElemStatLearn") 
+data(spam, package="kernlab") 
 head(spam)
 
-head(y.vec <- ifelse(spam$spam=="spam", 1, -1))
+head(y.vec <- ifelse(spam$type=="spam", 1, -1))
 table(y.vec)
-head(X.mat <- as.matrix(subset(spam, select=-spam)))
+head(X.mat <- as.matrix(subset(spam, select=-type)))
 
 (is.binary <- all(y.vec %in% c(-1, 1)))
 step.size <- 0.02
@@ -46,7 +46,6 @@ head(dv <- unname(dw * A.deriv * matrix(w, nrow(A.deriv), ncol(A.deriv), byrow=T
 ## take a step.
 (w <- w - step.size * grad.w)
 (V <- V - step.size * grad.V)
-
 predict.sc <- function(X.tilde){
   A.mat <- X.tilde %*% V
   sigmoid(A.mat) %*% w
@@ -56,7 +55,6 @@ predict1.orig <- function(X.unsc){
     X.unsc, attr(X.sc, "scaled:center"), attr(X.sc, "scaled:scale"))
   predict.sc(X.tilde)
 }
-
 V.orig <- V/attr(X.sc, "scaled:scale")
 b.orig <- - t(V/attr(X.sc, "scaled:scale")) %*% attr(X.sc, "scaled:center")
 V.with.intercept <- rbind(intercept=as.numeric(b.orig), V.orig)
@@ -68,7 +66,6 @@ rbind(
   as.numeric(head(predict.sc(X.sc))),
   as.numeric(head(predict1.orig(X.train))),
   as.numeric(head(predict2.orig(X.train))))
-
 ## train/validation error.
 pred.vec <- as.numeric(predict2.orig(X.mat))
 set.list <- list(
