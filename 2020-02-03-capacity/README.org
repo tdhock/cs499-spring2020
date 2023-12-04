@@ -15,3 +15,5 @@ Demos of how to make figures in R
 [[file:figure-quadratic-interactive.R][animint2 demo script]] makes https://tdhock.github.io/2020-02-03-capacity-polynomial-degree/
 
 [[file:figure-several-interactive.R]] makes https://tdhock.github.io/2023-12-04-capacity-polynomial-degree-several-patterns/
+
+[[file:figure-polynomial-neighbors-interactive.R]] makes https://tdhock.github.io/2023-12-04-degree-neighbors/
