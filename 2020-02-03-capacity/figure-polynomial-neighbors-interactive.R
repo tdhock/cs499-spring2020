@@ -85,6 +85,9 @@ set.colors <- c(
 model.colors <- c(
   "linear model polynomial degree"="blue",
   "number of nearest neighbors"="green")
+model.sizes <- c(
+  "linear model polynomial degree"=3,
+  "number of nearest neighbors"=2)
 expand <- 0.1
 not.grid <- model.dt[set!="grid"]
 model.dt[, pred.thresh := ifelse(
@@ -152,6 +155,7 @@ height.pixels <- 500
     theme_animint(height=height.pixels)+
     scale_fill_manual(values=set.colors)+
     scale_color_manual(values=model.colors)+
+    scale_size_manual(values=model.sizes)+
     geom_point(aes(
       x, ynorm, fill=set, key=x),
       size=4,
@@ -159,6 +163,7 @@ height.pixels <- 500
       data=not.grid)+
     geom_line(aes(
       x, pred.thresh,
+      size=regularization,
       key=regularization,
       group=regularization,
       color=regularization),
