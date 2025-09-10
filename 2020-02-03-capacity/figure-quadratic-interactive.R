@@ -75,6 +75,24 @@ model.dt[, pred.thresh := ifelse(
   pred.y < min(not.grid$y)-expand, -Inf,
   ifelse(pred.y > max(not.grid$y)+expand, Inf, pred.y))]
 (viz <- animint(
+  error=ggplot()+
+    ylab("log10(mean squared error)")+
+    scale_x_continuous("polynomial degree", breaks=degree.vec)+
+    scale_color_manual(values=set.colors)+
+    geom_line(aes(
+      degree, log10(mse.thresh), color=set, group=set),
+      showSelected="set",
+      help="Error of the linear model as a function of the degree of the polynomial basis expansion",
+      data=error.dt)+
+    geom_point(aes(
+      degree, log10(mse.thresh), color=set),
+      shape=1,
+      showSelected="set",
+      help="Minimum error on the test set",
+      fill="white",
+      data=best.err)+
+    theme(legend.position="none")+
+    make_tallrect(error.dt, "degree", color=NA, fill="blue"),
   funs=ggplot()+
     xlab("input/feature")+
     ylab("output/label")+
@@ -82,28 +100,16 @@ model.dt[, pred.thresh := ifelse(
     geom_point(aes(
       x, y, color=set),
       shape=1,
+      help="Data points to which a linear model is fit (train=black) and evaluated (test=red), using a polynomial basis expansion",
       fill=NA,
       size=4,
-      stroke=1,
       data=not.grid)+
     geom_line(aes(
       x, pred.thresh, key="pred"),
       data=model.dt[set=="grid"],
       color=model.color,
+      help="Predicted values from the linear model with the selected basis expansion",
       showSelected="degree"),
-  error=ggplot()+
-    ylab("log10(mean squared error)")+
-    scale_x_continuous("polynomial degree", breaks=degree.vec)+
-    scale_color_manual(values=set.colors)+
-    geom_line(aes(
-      degree, log10(mse.thresh), color=set, group=set),
-      data=error.dt)+
-    geom_point(aes(
-      degree, log10(mse.thresh), color=set),
-      shape=1,
-      fill="white",
-      data=best.err)+
-    make_tallrect(error.dt, "degree", color=NA, fill="blue"),
   duration=list(degree=1000),
   out.dir="figure-quadratic-interactive",
   title="Overfitting using linear model polynomial degree",
