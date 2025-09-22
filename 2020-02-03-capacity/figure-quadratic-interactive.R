@@ -115,5 +115,5 @@ model.dt[, pred.thresh := ifelse(
   title="Overfitting using linear model polynomial degree",
   source="https://github.com/tdhock/cs499-spring2020/blob/master/2020-02-03-capacity/figure-quadratic-interactive.R"))
 if(FALSE){
-  animint2pages(viz, "2020-02-03-capacity-polynomial-degree")
+  animint2pages(viz, "2020-02-03-capacity-polynomial-degree", chromote_sleep_seconds = 5)
 }

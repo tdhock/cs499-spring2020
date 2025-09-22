@@ -170,6 +170,6 @@ height.pixels <- 500
   first=structure(list(10), names=num.nn),
   source="https://github.com/tdhock/cs499-spring2020/blob/master/2020-02-03-capacity/figure-polynomial-neighbors-interactive.R"))
 if(FALSE){
-  animint2pages(viz, "2023-12-04-degree-neighbors")
+  animint2pages(viz, "2023-12-04-degree-neighbors", chromote_sleep_seconds=5)
 }
 

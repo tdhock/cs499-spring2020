@@ -177,7 +177,7 @@ for(model.i in 1:nrow(reg.dt)){
 viz <- animint(
   duration=duration.list,
   out.dir="figure-polynomial-neighbors-table-interactive",
-  title="Overfitting using linear model polynomial degree and nearest neighbors",
+  title="Overfitting using linear model polynomial degree and nearest neighbors, HTML table layout",
   first=first.list,
   selectize=selectize.list,
   source="https://github.com/tdhock/cs499-spring2020/blob/master/2020-02-03-capacity/figure-polynomial-neighbors-table-interactive.R")
