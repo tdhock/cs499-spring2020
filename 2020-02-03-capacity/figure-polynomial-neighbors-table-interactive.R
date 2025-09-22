@@ -79,7 +79,7 @@ set.colors <- c(
   test="red")
 reg.dt <- rbind(
   data.table(
-    model="Linear model with polynomial basis", first=1,
+    model="Linear (polynomial basis)", first=1,
     regularization=lm.poly.deg, color="blue", size=3, hjust=0, fun="max"),
   data.table(
     model="Nearest neighbors", first=3,
@@ -188,6 +188,6 @@ for(plot.i in seq_along(plot.ord)){
 }
 viz
 if(FALSE){
-  animint2pages(viz, "2025-09-22-degree-neighbors-table")
+  animint2pages(viz, "2025-09-22-degree-neighbors-table", chromote_sleep_seconds = 5)
 }
 
