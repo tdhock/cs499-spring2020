@@ -19,6 +19,8 @@ x <- runif(N.total, min.x, max.x)
 set <- rep("test", N.total)
 set[1:N.train] <- "train"
 model.dt.list <- list()
+lm.poly.deg <- "linear model poly. deg."
+num.nn <- "num. nearest neighbors"
 for(pattern.i in 1:nrow(pattern.dt)){
   pattern.row <- pattern.dt[pattern.i]
   set.seed(pattern.row$seed)
@@ -47,16 +49,9 @@ for(pattern.i in 1:nrow(pattern.dt)){
       all.sets,
       pred.y,
       parameter=degree,
-      regularization="linear model polynomial degree")
+      regularization=lm.poly.deg)
   }
   for(num.neighbors in 1:N.train){
-    ## kfit <- kknn::kknn(
-    ##   ynorm~x,
-    ##   train.set,
-    ##   all.sets[, .(x)],
-    ##   k=num.neighbors,
-    ##   scale=FALSE,
-    ##   kernel="rectangular")
     kfit <- FNN::knn.reg(
       train.set[, .(x)],
       all.sets[, .(x)],
@@ -67,7 +62,7 @@ for(pattern.i in 1:nrow(pattern.dt)){
       all.sets,
       pred.y=kfit[["pred"]],
       parameter=num.neighbors,
-      regularization="number of nearest neighbors")
+      regularization=num.nn)
   }
 }
 model.dt <- do.call(rbind, model.dt.list)
@@ -82,22 +77,21 @@ best.err <- error.dt[set=="test"][, .SD[mse==min(mse)], by=.(pattern, regulariza
 set.colors <- c(
   train="black",
   test="red")
-model.colors <- c(
-  "linear model polynomial degree"="blue",
-  "number of nearest neighbors"="green")
-model.sizes <- c(
-  "linear model polynomial degree"=3,
-  "number of nearest neighbors"=2)
+reg.dt <- rbind(
+  data.table(regularization=lm.poly.deg, color="blue", size=3, hjust=0, fun="max"),
+  data.table(regularization=num.nn, color="green", size=2, hjust=1, fun="min"))
+model.colors <- reg.dt[, structure(color, names=regularization)]
+model.sizes <- reg.dt[, structure(size, names=regularization)]
 expand <- 0.1
 not.grid <- model.dt[set!="grid"]
 model.dt[, pred.thresh := ifelse(
   pred.y < min(not.grid$ynorm)-expand, -Inf,
   ifelse(pred.y > max(not.grid$ynorm)+expand, Inf, pred.y))]
 tallrect.dt <- unique(error.dt[, .(regularization, parameter)])
-test.err <- error.dt[set=="test"]
-(text.dt <- rbind(
-  test.err[regularization=="linear model polynomial degree"][parameter==max(parameter)][, hjust := 0],
-  test.err[regularization=="number of nearest neighbors"][parameter==min(parameter)][, hjust := 1]))
+(text.dt <- error.dt[set=="test"][reg.dt, on="regularization"][, {
+  FUN <- get(fun)
+  .SD[parameter==FUN(parameter)]
+}, by=fun])
 duration.list <- list(pattern=1000)
 for(regularization in names(model.colors)){
   duration.list[[regularization]] <- 1000
@@ -123,13 +117,14 @@ height.pixels <- 500
       alpha=0.5,
       color=NA,
       data=tallrect.dt,
+      showSelected=c("regularization"),
       clickSelects=c(regularization="parameter"))+
     geom_line(aes(
       parameter, log10(mse.thresh), color=set, group=paste(pattern, set)),
       clickSelects="pattern",
-      showSelected="set",
       size=5,
       alpha_off=0.1,
+      showSelected=c("regularization", "set"),
       data=error.dt)+
     geom_point(aes(
       parameter, log10(mse.thresh), color=set),
@@ -138,15 +133,15 @@ height.pixels <- 500
       alpha_off=0.1,
       size=4,
       clickSelects="pattern",
-      showSelected="set",
+      showSelected=c("regularization", "set"),
       data=best.err)+
-    geom_text(aes(
+    geom_label_aligned(aes(
       parameter, log10(mse.thresh),
       hjust=hjust,
       label=pattern,
       color=set),
       clickSelects="pattern",
-      showSelected="set",
+      showSelected=c("regularization", "set"),
       data=text.dt),
   funs=ggplot()+
     ggtitle("Selected pattern (points) and models (curves)")+
@@ -172,8 +167,7 @@ height.pixels <- 500
   duration=duration.list,
   out.dir="figure-polynomial-neighbors-interactive",
   title="Overfitting using linear model polynomial degree and nearest neighbors",
-  first=list(
-    "number of nearest neighbors"=10),
+  first=structure(list(10), names=num.nn),
   source="https://github.com/tdhock/cs499-spring2020/blob/master/2020-02-03-capacity/figure-polynomial-neighbors-interactive.R"))
 if(FALSE){
   animint2pages(viz, "2023-12-04-degree-neighbors")
