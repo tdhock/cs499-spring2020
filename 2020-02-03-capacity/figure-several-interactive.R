@@ -125,9 +125,9 @@ model.dt[, pred.thresh := ifelse(
       showSelected=c("pattern", "degree")),
   duration=list(pattern=1000, degree=1000),
   out.dir="figure-several-interactive",
-  title="Overfitting using linear model polynomial degree",
+  title="Overfitting using linear model polynomial degree, select pattern",
   source="https://github.com/tdhock/cs499-spring2020/blob/master/2020-02-03-capacity/figure-several-interactive.R"))
 if(FALSE){
-  animint2pages(viz, "2023-12-04-capacity-polynomial-degree-several-patterns")
+  animint2pages(viz, "2023-12-04-capacity-polynomial-degree-several-patterns", chromote_sleep_seconds=5)
 }
 
